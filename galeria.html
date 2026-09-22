@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería · Gotham Archive — El Pingüino (2024)</title>
+  <meta name="description" content="Galería de El Pingüino (HBO, 2024): escenas de los 8 episodios, retratos de los personajes y material promocional, como un muro de evidencia.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:title" content="Galería · Gotham Archive">
+  <meta property="og:description" content="El muro de evidencia de El Pingüino: escenas, personajes y material promocional. Fan page no oficial.">
+  <meta property="og:image" content="img/the-penguin-poster.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Íconos de redes (Font Awesome, solo la fuente de marcas) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css">
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+<a class="saltar" href="#principal">Saltar al contenido</a>
+
+<!-- ============ CABECERA ============ -->
+<header class="cabecera">
+  <div class="contenedor cabecera__interior">
+    <a class="marca" href="index.html"><span class="marca__nombre">GOTHAM ARCHIVE</span><span class="marca__exp">EXP. N.º 2024-OZ</span></a>
+    <button class="nav__boton" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav"><span></span></button>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <ul class="nav__lista" role="list">
+        <li class="nav__item"><a class="nav__link" href="index.html">Inicio</a></li>
+        <li class="nav__item nav__item--sub">
+          <a class="nav__link" href="episodios.html">Episodios</a>
+          <ul class="submenu" role="list">
+            <li><a href="episodios/episodio-01.html"><span class="submenu__num">01</span>After Hours</a></li>
+            <li><a href="episodios/episodio-02.html"><span class="submenu__num">02</span>Inside Man</a></li>
+            <li><a href="episodios/episodio-03.html"><span class="submenu__num">03</span>Bliss</a></li>
+            <li><a href="episodios/episodio-04.html"><span class="submenu__num">04</span>Cent'Anni</a></li>
+            <li><a href="episodios/episodio-05.html"><span class="submenu__num">05</span>Homecoming</a></li>
+            <li><a href="episodios/episodio-06.html"><span class="submenu__num">06</span>Gold Summit</a></li>
+            <li><a href="episodios/episodio-07.html"><span class="submenu__num">07</span>Top Hat</a></li>
+            <li><a href="episodios/episodio-08.html"><span class="submenu__num">08</span>A Great or Little Thing</a></li>
+          </ul>
+        </li>
+        <li class="nav__item nav__item--sub">
+          <a class="nav__link" href="personajes.html">Personajes</a>
+          <ul class="submenu submenu--personajes" role="list">
+            <li><a href="personajes/oz-cobb.html"><span class="submenu__num">01</span>Oz Cobb</a></li>
+            <li><a href="personajes/sofia-falcone.html"><span class="submenu__num">02</span>Sofia Falcone</a></li>
+            <li><a href="personajes/salvatore-maroni.html"><span class="submenu__num">03</span>Salvatore Maroni</a></li>
+            <li><a href="personajes/victor-aguilar.html"><span class="submenu__num">04</span>Victor Aguilar</a></li>
+            <li><a href="personajes/francis-cobb.html"><span class="submenu__num">05</span>Francis Cobb</a></li>
+          </ul>
+        </li>
+        <li class="nav__item"><a class="nav__link" href="galeria.html" aria-current="page">Galería</a></li>
+        <li class="nav__item"><a class="nav__link" href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="principal">
+
+  <!-- ============ 1. PORTADA ============ -->
+  <section class="portada">
+    <div class="contenedor">
+      <ol class="migas" role="list">
+        <li><a href="index.html">Inicio</a></li>
+        <li aria-current="page">Galería</li>
+      </ol>
+      <p class="meta meta--oro mt-6">Exp. N.º 2024-OZ · Material fotográfico</p>
+      <h1 class="titulo titulo--xxl grunge">Muro de evidencia</h1>
+      <p class="bajada">Todo lo que el archivo pudo fotografiar: escenas de los ocho episodios, los sujetos del caso y el material que HBO dejó circular. Tocá cualquier foto para verla en grande.</p>
+      <span class="sello sello--grande grunge revelar" aria-hidden="true">14 pruebas</span>
+    </div>
+  </section>
+
+  <!-- ============ 2. MURO ============ -->
+  <section class="seccion seccion--grafito muro" aria-labelledby="muro-titulo">
+    <div class="contenedor">
+      <h2 class="visualmente-oculto" id="muro-titulo">Fotos del archivo</h2>
+
+      <div class="muro__barra">
+        <div class="filtros" role="group" aria-label="Filtrar por categoría">
+          <span class="meta">Mostrar:</span>
+          <button class="chip" type="button" data-categoria-filtro="todas" aria-pressed="true">Todas</button>
+          <button class="chip" type="button" data-categoria-filtro="episodios" aria-pressed="false">Episodios</button>
+          <button class="chip" type="button" data-categoria-filtro="personajes" aria-pressed="false">Personajes</button>
+          <button class="chip" type="button" data-categoria-filtro="promocional" aria-pressed="false">Promocional</button>
+        </div>
+        <p class="muro__contador meta" aria-live="polite">Mostrando <b>14</b> de 14 fotos</p>
+      </div>
+
+      <ul class="galeria" role="list">
+        <li class="galeria__item revelar" data-categoria="promocional">
+          <button class="galeria__boton" type="button" aria-label="Ampliar: Póster oficial">
+            <img src="img/the-penguin-poster.jpg" alt="Póster oficial de El Pingüino: Oz Cobb de traje, bajo la lluvia" width="1000" height="1250" loading="lazy">
+            <span class="galeria__pie">Póster oficial</span>
+          </button>
+        </li>
+        <li class="galeria__item revelar revelar--retraso-2" data-categoria="episodios">
+          <button class="galeria__boton" type="button" aria-label="Ampliar: EP. 01 — After Hours">
+            <img src="img/episodios/ep01.webp" alt="Oz Cobb, de traje oscuro, en un taller en penumbras" width="1584" height="1056" loading="lazy">
+            <span class="galeria__pie">EP. 01 — After Hours</span>
+          </button>
+        </li>
+        <li class="galeria__item revelar revelar--retraso-3" data-categoria="personajes">
+          <button class="galeria__boton" type="button" aria-label="Ampliar: Sujeto: Oz Cobb">
+            <img src="img/personajes/oz-cobb.webp" alt="Retrato de Oz Cobb, sentado, con traje oscuro" width="800" height="800" loading="lazy">
+            <span class="galeria__pie">Sujeto: Oz Cobb</span>
+          </button>
+        </li>
+        <li class="galeria__item revelar" data-categoria="episodios">
+          <button class="galeria__boton" type="button" aria-label="Ampliar: EP. 02 — Inside Man">
+            <img src="img/episodios/ep02.webp" alt="Oz Cobb, con campera de cuero, conversa con Victor en una mesa" width="1584" height="1056" loading="lazy">
+            <span class="galeria__pie">EP. 02 — Inside Man</span>
+          </button>
+        </li>
+        <li class="galeria__item revelar revelar--retraso-2" data-categoria="episodios">
+          <button class="galeria__boton" type="button" aria-label="Ampliar: EP. 03 — Bliss">
+            <img src="img/episodios/ep03.webp" alt="Oz Cobb, de saco claro, junto a Sofia Falcone en una calle de noche" width="1584" height="1056" loading="lazy">
+            <span class="galeria__pie">EP. 03 — Bliss</span>
+          </button>
+        </li>
+        <li class="galeria__item revelar revelar--retraso-3" data-categoria="personajes">
+          <button class="galeria__boton" type="button" aria-label="Ampliar: Sujeto: Sofia Falcone">
+            <img src="img/personajes/sofia-falcone.webp" alt="Retrato de Sofia Falcone con un abrigo de piel" width="800" height="800" loading="lazy">
+            <span class="galeria__pie">Sujeto: Sofia Falcone</span>
+          </button>
+        </li>
+        <li class="galeria__item revelar" data-categoria="promocional">
+          <button class="galeria__boton" type="button" aria-label="Ampliar: Gotham, después de la inundación">
+            <img src="img/hero-gotham.jpg" alt="Gotham de noche: un puente iluminado sobre el río y los edificios del centro" width="1920" height="1080" loading="lazy">
+            <span class="galeria__pie">Gotham, después de la inundación</span>
+          </button>
+        </li>
+        <li class="galeria__item revelar revelar--retraso-2" data-categoria="episodios">
+          <button class="galeria__boton" type="button" aria-label="Ampliar: EP. 04 — Cent&#x27;Anni">
+            <img src="img/episodios/ep04.webp" alt="Sofia Falcone, con el uniforme a rayas de Arkham, en el piso de un pasillo" width="1584" height="1056" loading="lazy">
+            <span class="galeria__pie">EP. 04 — Cent&#x27;Anni</span>
+          </button>
+        </li>
+        <li class="galeria__item revelar revelar--retraso-3" data-categoria="personajes">
+          <button class="galeria__boton" type="button" aria-label="Ampliar: Sujeto: Victor Aguilar">
+            <img src="img/personajes/victor-aguilar.webp" alt="Retrato de Victor Aguilar en una estación de subte" width="642" height="800" loading="lazy">
+            <span class="galeria__pie">Sujeto: Victor Aguilar</span>
+          </button>
+        </li>
+        <li class="galeria__item revelar" data-categoria="episodios">
+          <button class="galeria__boton" type="button" aria-label="Ampliar: EP. 05 — Homecoming">
+            <img src="img/episodios/ep05.webp" alt="Sofia Falcone, con abrigo de piel, en una habitación empapelada" width="1584" height="1056" loading="lazy">
+            <span class="galeria__pie">EP. 05 — Homecoming</span>
+          </button>
+        </li>
+        <li class="galeria__item revelar revelar--retraso-2" data-categoria="episodios">
+          <button class="galeria__boton" type="button" aria-label="Ampliar: EP. 06 — Gold Summit">
+            <img src="img/episodios/ep06.webp" alt="Francis, Oz y Victor sentados a una mesa con comida" width="1584" height="1056" loading="lazy">
+            <span class="galeria__pie">EP. 06 — Gold Summit</span>
+          </button>
+        </li>
+        <li class="galeria__item revelar revelar--retraso-3" data-categoria="personajes">
+          <button class="galeria__boton" type="button" aria-label="Ampliar: Sujeto: Salvatore Maroni">
+            <img src="img/personajes/salvatore-maroni.webp" alt="Retrato de Salvatore Maroni, de pelo y barba blancos" width="800" height="800" loading="lazy">
+            <span class="galeria__pie">Sujeto: Salvatore Maroni</span>
+          </button>
+        </li>
+        <li class="galeria__item revelar" data-categoria="episodios">
+          <button class="galeria__boton" type="button" aria-label="Ampliar: EP. 07 — Top Hat">
+            <img src="img/episodios/ep07.webp" alt="Oz Cobb, con un sobretodo, avanza por un pasillo oscuro" width="1584" height="1056" loading="lazy">
+            <span class="galeria__pie">EP. 07 — Top Hat</span>
+          </button>
+        </li>
+        <li class="galeria__item revelar revelar--retraso-2" data-categoria="episodios">
+          <button class="galeria__boton" type="button" aria-label="Ampliar: EP. 08 — A Great or Little Thing">
+            <img src="img/episodios/ep08.webp" alt="Oz Cobb de perfil, de noche, iluminado por una luz lejana" width="1584" height="1056" loading="lazy">
+            <span class="galeria__pie">EP. 08 — A Great or Little Thing</span>
+          </button>
+        </li>
+      </ul>
+
+      <p class="muro__ayuda maquina">Dentro del visor: flechas ← → para pasar de foto, Esc para cerrar.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ PIE ============ -->
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__cabeza">
+      <p class="pie__frase grunge">Gotham no<br>se salva.</p>
+      <ul class="pie__redes" role="list" aria-label="Redes sociales">
+        <li><a class="pie__red" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+        <li><a class="pie__red" href="#" aria-label="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+        <li><a class="pie__red" href="#" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a></li>
+        <li><a class="pie__red" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a></li>
+      </ul>
+    </div>
+    <div class="pie__base">
+      <span class="meta">Fan site no oficial · Proyecto Gotham Archive · Imágenes © HBO / Warner Bros. Discovery</span>
+      <ul class="pie__links" role="list">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="episodios.html">Episodios</a></li>
+        <li><a href="personajes.html">Personajes</a></li>
+        <li><a href="galeria.html" aria-current="page">Galería</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

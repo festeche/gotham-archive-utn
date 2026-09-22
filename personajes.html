@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personajes · Gotham Archive — El Pingüino (2024)</title>
+  <meta name="description" content="Los personajes de El Pingüino (HBO, 2024) como sujetos de una investigación: tablero de relaciones, expedientes de los principales y fichas de los secundarios.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:title" content="Personajes · Gotham Archive">
+  <meta property="og:description" content="Tablero de relaciones y expedientes de los sujetos de El Pingüino. Fan page no oficial.">
+  <meta property="og:image" content="img/personajes/oz-cobb.webp">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Íconos de redes (Font Awesome, solo la fuente de marcas) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css">
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+<a class="saltar" href="#principal">Saltar al contenido</a>
+
+<!-- ============ CABECERA ============ -->
+<header class="cabecera">
+  <div class="contenedor cabecera__interior">
+    <a class="marca" href="index.html"><span class="marca__nombre">GOTHAM ARCHIVE</span><span class="marca__exp">EXP. N.º 2024-OZ</span></a>
+    <button class="nav__boton" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav"><span></span></button>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <ul class="nav__lista" role="list">
+        <li class="nav__item"><a class="nav__link" href="index.html">Inicio</a></li>
+        <li class="nav__item nav__item--sub">
+          <a class="nav__link" href="episodios.html">Episodios</a>
+          <ul class="submenu" role="list">
+            <li><a href="episodios/episodio-01.html"><span class="submenu__num">01</span>After Hours</a></li>
+            <li><a href="episodios/episodio-02.html"><span class="submenu__num">02</span>Inside Man</a></li>
+            <li><a href="episodios/episodio-03.html"><span class="submenu__num">03</span>Bliss</a></li>
+            <li><a href="episodios/episodio-04.html"><span class="submenu__num">04</span>Cent'Anni</a></li>
+            <li><a href="episodios/episodio-05.html"><span class="submenu__num">05</span>Homecoming</a></li>
+            <li><a href="episodios/episodio-06.html"><span class="submenu__num">06</span>Gold Summit</a></li>
+            <li><a href="episodios/episodio-07.html"><span class="submenu__num">07</span>Top Hat</a></li>
+            <li><a href="episodios/episodio-08.html"><span class="submenu__num">08</span>A Great or Little Thing</a></li>
+          </ul>
+        </li>
+        <li class="nav__item nav__item--sub">
+          <a class="nav__link" href="personajes.html" aria-current="page">Personajes</a>
+          <ul class="submenu submenu--personajes" role="list">
+            <li><a href="personajes/oz-cobb.html"><span class="submenu__num">01</span>Oz Cobb</a></li>
+            <li><a href="personajes/sofia-falcone.html"><span class="submenu__num">02</span>Sofia Falcone</a></li>
+            <li><a href="personajes/salvatore-maroni.html"><span class="submenu__num">03</span>Salvatore Maroni</a></li>
+            <li><a href="personajes/victor-aguilar.html"><span class="submenu__num">04</span>Victor Aguilar</a></li>
+            <li><a href="personajes/francis-cobb.html"><span class="submenu__num">05</span>Francis Cobb</a></li>
+          </ul>
+        </li>
+        <li class="nav__item"><a class="nav__link" href="galeria.html">Galería</a></li>
+        <li class="nav__item"><a class="nav__link" href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="principal">
+
+  <!-- ============ 1. PORTADA ============ -->
+  <section class="portada">
+    <div class="contenedor">
+      <ol class="migas" role="list">
+        <li><a href="index.html">Inicio</a></li>
+        <li aria-current="page">Personajes</li>
+      </ol>
+      <p class="meta meta--oro mt-6">Exp. N.º 2024-OZ · Sujetos de la investigación</p>
+      <h1 class="titulo titulo--xxl grunge">Tablero de sujetos</h1>
+      <p class="bajada">Cinco sujetos principales, cada uno con su expediente, y los secundarios que se cruzaron en su camino. Los hilos rojos marcan quién está conectado con quién.</p>
+      <span class="sello sello--grande grunge revelar" aria-hidden="true">5 + 7 sujetos</span>
+    </div>
+  </section>
+
+  <!-- ============ 2. TABLERO DE RELACIONES ============ -->
+  <section class="seccion seccion--grafito" aria-labelledby="tablero-titulo">
+    <div class="contenedor">
+      <div class="seccion__cabeza">
+        <div>
+          <span class="meta meta--rojo">Sujetos principales</span>
+          <h2 class="titulo grunge" id="tablero-titulo">Quién es quién</h2>
+        </div>
+      </div>
+
+      <div class="tablero-zona">
+        <div class="tablero">
+          <svg class="tablero__hilos" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <path class="hilo" data-sujetos="oz sofia" vector-effect="non-scaling-stroke" d="M50 7 Q30 14 18 35"/>
+          <path class="hilo" data-sujetos="oz sal" vector-effect="non-scaling-stroke" d="M50 7 Q70 14 82 35"/>
+          <path class="hilo" data-sujetos="oz victor" vector-effect="non-scaling-stroke" d="M50 7 Q40 34 34 64"/>
+          <path class="hilo" data-sujetos="oz francis" vector-effect="non-scaling-stroke" d="M50 7 Q60 34 66 64"/>
+          <path class="hilo" data-sujetos="sofia sal" vector-effect="non-scaling-stroke" d="M18 35 Q50 26 82 35"/>
+          <path class="hilo" data-sujetos="sofia francis" vector-effect="non-scaling-stroke" d="M18 35 Q44 58 66 64"/>
+          <path class="hilo" data-sujetos="victor francis" vector-effect="non-scaling-stroke" d="M34 64 Q50 73 66 64"/>
+          </svg>
+        <button class="polaroid" type="button" data-sujeto="oz" aria-pressed="false" aria-controls="tablero-panel" style="--x: calc(50% - 75px); --y: 6%; --r: -2deg">
+          <img src="img/personajes/oz-cobb.webp" alt="" width="800" height="800" loading="lazy">
+          <span class="polaroid__nombre">Oz Cobb</span>
+        </button>
+        <button class="polaroid" type="button" data-sujeto="sofia" aria-pressed="false" aria-controls="tablero-panel" style="--x: calc(18% - 75px); --y: 34%; --r: 4deg">
+          <img src="img/personajes/sofia-falcone.webp" alt="" width="800" height="800" loading="lazy">
+          <span class="polaroid__nombre">Sofia Falcone</span>
+        </button>
+        <button class="polaroid" type="button" data-sujeto="sal" aria-pressed="false" aria-controls="tablero-panel" style="--x: calc(82% - 75px); --y: 34%; --r: -4deg">
+          <img src="img/personajes/salvatore-maroni.webp" alt="" width="800" height="800" loading="lazy">
+          <span class="polaroid__nombre">Salvatore Maroni</span>
+        </button>
+        <button class="polaroid" type="button" data-sujeto="victor" aria-pressed="false" aria-controls="tablero-panel" style="--x: calc(34% - 75px); --y: 63%; --r: 3deg">
+          <img src="img/personajes/victor-aguilar.webp" alt="" width="800" height="800" loading="lazy">
+          <span class="polaroid__nombre">Victor Aguilar</span>
+        </button>
+        <button class="polaroid" type="button" data-sujeto="francis" aria-pressed="false" aria-controls="tablero-panel" style="--x: calc(66% - 75px); --y: 63%; --r: -3deg">
+          <span class="placeholder">francis-cobb.webp</span>
+          <span class="polaroid__nombre">Francis Cobb</span>
+        </button>
+          <span class="sello grunge tablero__sello" aria-hidden="true">Relaciones</span>
+        </div>
+
+        <aside class="tablero__panel" id="tablero-panel" aria-live="polite">
+          <div class="tablero__info" data-info="ninguno">
+            <p class="meta meta--rojo">Tablero de relaciones</p>
+            <p class="tablero__intro maquina">Tocá una foto para ver con quién está conectado cada sujeto y abrir su expediente.</p>
+          </div>
+          <div class="tablero__info" data-info="oz" hidden>
+            <p class="meta meta--rojo">Sujeto principal</p>
+            <p class="tablero__nombre">Oz Cobb</p>
+            <p class="tablero__desc">Chofer de los Falcone que ve, en el caos después de la inundación, su oportunidad de quedarse con Gotham.</p>
+            <ul class="tablero__rels" role="list">
+              <li><span class="tablero__rel-nombre">Sofia Falcone</span><span class="tablero__rel-vinculo">Aliada de negocios… y su peor enemiga</span></li>
+              <li><span class="tablero__rel-nombre">Salvatore Maroni</span><span class="tablero__rel-vinculo">Un doble juego desde el primer episodio</span></li>
+              <li><span class="tablero__rel-nombre">Victor Aguilar</span><span class="tablero__rel-vinculo">Su chofer, su aprendiz, casi un hijo</span></li>
+              <li><span class="tablero__rel-nombre">Francis Cobb</span><span class="tablero__rel-vinculo">Su madre: la promesa que lo mueve todo</span></li>
+            </ul>
+            <a class="btn btn--solido" href="personajes/oz-cobb.html">Abrir expediente <span class="btn__flecha" aria-hidden="true">→</span></a>
+          </div>
+          <div class="tablero__info" data-info="sofia" hidden>
+            <p class="meta meta--rojo">Sujeto principal</p>
+            <p class="tablero__nombre">Sofia Falcone</p>
+            <p class="tablero__desc">Heredera de los Falcone, recién salida de Arkham y decidida a recuperar lo que le quitaron.</p>
+            <ul class="tablero__rels" role="list">
+              <li><span class="tablero__rel-nombre">Oz Cobb</span><span class="tablero__rel-vinculo">Socio de negocios… mientras le convenga</span></li>
+              <li><span class="tablero__rel-nombre">Salvatore Maroni</span><span class="tablero__rel-vinculo"><span class="censura" tabindex="0" role="button" aria-label="Spoiler: tocá para revelar">Su aliado contra Oz</span></span></li>
+              <li><span class="tablero__rel-nombre">Francis Cobb</span><span class="tablero__rel-vinculo"><span class="censura" tabindex="0" role="button" aria-label="Spoiler: tocá para revelar">Su rehén</span></span></li>
+            </ul>
+            <a class="btn btn--solido" href="personajes/sofia-falcone.html">Abrir expediente <span class="btn__flecha" aria-hidden="true">→</span></a>
+          </div>
+          <div class="tablero__info" data-info="sal" hidden>
+            <p class="meta meta--rojo">Sujeto principal</p>
+            <p class="tablero__nombre">Salvatore Maroni</p>
+            <p class="tablero__desc">Jefe de la familia Maroni. Maneja su imperio desde una celda de Blackgate.</p>
+            <ul class="tablero__rels" role="list">
+              <li><span class="tablero__rel-nombre">Oz Cobb</span><span class="tablero__rel-vinculo">Socio en un doble juego</span></li>
+              <li><span class="tablero__rel-nombre">Sofia Falcone</span><span class="tablero__rel-vinculo"><span class="censura" tabindex="0" role="button" aria-label="Spoiler: tocá para revelar">Su aliada contra Oz</span></span></li>
+            </ul>
+            <a class="btn btn--solido" href="personajes/salvatore-maroni.html">Abrir expediente <span class="btn__flecha" aria-hidden="true">→</span></a>
+          </div>
+          <div class="tablero__info" data-info="victor" hidden>
+            <p class="meta meta--rojo">Sujeto principal</p>
+            <p class="tablero__nombre">Victor Aguilar</p>
+            <p class="tablero__desc">Chico de Crown Point que perdió todo en la inundación y encontró en Oz a alguien que lo mira.</p>
+            <ul class="tablero__rels" role="list">
+              <li><span class="tablero__rel-nombre">Oz Cobb</span><span class="tablero__rel-vinculo">Su jefe y lo más parecido a un padre</span></li>
+              <li><span class="tablero__rel-nombre">Francis Cobb</span><span class="tablero__rel-vinculo">La cuida cuando Oz no puede</span></li>
+            </ul>
+            <a class="btn btn--solido" href="personajes/victor-aguilar.html">Abrir expediente <span class="btn__flecha" aria-hidden="true">→</span></a>
+          </div>
+          <div class="tablero__info" data-info="francis" hidden>
+            <p class="meta meta--rojo">Sujeto principal</p>
+            <p class="tablero__nombre">Francis Cobb</p>
+            <p class="tablero__desc">Madre de Oz. Su memoria se apaga, pero guarda un secreto sobre sus otros hijos.</p>
+            <ul class="tablero__rels" role="list">
+              <li><span class="tablero__rel-nombre">Oz Cobb</span><span class="tablero__rel-vinculo">Su hijo, el único que le queda</span></li>
+              <li><span class="tablero__rel-nombre">Victor Aguilar</span><span class="tablero__rel-vinculo">El chico que la cuida</span></li>
+              <li><span class="tablero__rel-nombre">Sofia Falcone</span><span class="tablero__rel-vinculo"><span class="censura" tabindex="0" role="button" aria-label="Spoiler: tocá para revelar">Su captora</span></span></li>
+            </ul>
+            <a class="btn btn--solido" href="personajes/francis-cobb.html">Abrir expediente <span class="btn__flecha" aria-hidden="true">→</span></a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. SUJETOS SECUNDARIOS ============ -->
+  <section class="seccion seccion--borde" aria-labelledby="secundarios-titulo">
+    <div class="contenedor">
+      <div class="seccion__cabeza">
+        <div>
+          <span class="meta meta--rojo">Fichas breves</span>
+          <h2 class="titulo grunge" id="secundarios-titulo">Sujetos secundarios</h2>
+        </div>
+      </div>
+      <ul class="secundarios" role="list">
+        <li class="revelar">
+          <article class="secundario">
+            <span class="secundario__sello" aria-hidden="true">AF</span>
+            <p class="meta">Sujeto secundario · Familia Falcone</p>
+            <h3 class="secundario__nombre">Alberto Falcone</h3>
+            <p class="secundario__actor">Interpretado por Michael Zegen</p>
+            <p class="secundario__desc">El hijo menor de Carmine. Quería reflotar el imperio familiar con una droga nueva.</p>
+            <p class="secundario__eps"><span class="visualmente-oculto">Aparece en: </span><a class="chip" href="episodios/episodio-01.html" title="Episodio 01">EP. 01</a> <a class="chip" href="episodios/episodio-04.html" title="Episodio 04 (recuerdos)">EP. 04</a></p>
+          </article>
+        </li>
+        <li class="revelar revelar--retraso-2">
+          <article class="secundario">
+            <span class="secundario__sello" aria-hidden="true">CF</span>
+            <p class="meta">Sujeto secundario · Familia Falcone</p>
+            <h3 class="secundario__nombre">Carmine Falcone</h3>
+            <p class="secundario__actor">Interpretado por Mark Strong</p>
+            <p class="secundario__desc">El patriarca muerto cuyo vacío desata la guerra. Aparece en los recuerdos de Sofia.</p>
+            <p class="secundario__eps"><span class="visualmente-oculto">Aparece en: </span><a class="chip" href="episodios/episodio-04.html" title="Episodio 04">EP. 04</a></p>
+          </article>
+        </li>
+        <li class="revelar revelar--retraso-3">
+          <article class="secundario">
+            <span class="secundario__sello" aria-hidden="true">LF</span>
+            <p class="meta">Sujeto secundario · Familia Falcone</p>
+            <h3 class="secundario__nombre">Luca Falcone</h3>
+            <p class="secundario__actor">Interpretado por Scott Cohen</p>
+            <p class="secundario__desc">Hermano de Carmine. Toma el mando de la familia y aparta a Sofia de los negocios.</p>
+            <p class="secundario__eps"><span class="visualmente-oculto">Aparece en: </span><a class="chip" href="episodios/episodio-02.html" title="Episodio 02">EP. 02</a> <a class="chip" href="episodios/episodio-03.html" title="Episodio 03">EP. 03</a> <a class="chip" href="episodios/episodio-04.html" title="Episodio 04">EP. 04</a></p>
+          </article>
+        </li>
+        <li class="revelar">
+          <article class="secundario">
+            <span class="secundario__sello" aria-hidden="true">JV</span>
+            <p class="meta">Sujeto secundario · Familia Falcone</p>
+            <h3 class="secundario__nombre">Johnny Viti</h3>
+            <p class="secundario__actor">Interpretado por Michael Kelly</p>
+            <p class="secundario__desc">Subjefe de los Falcone, siempre del lado del que parece ir ganando.</p>
+            <p class="secundario__eps"><span class="visualmente-oculto">Aparece en: </span><a class="chip" href="episodios/episodio-01.html" title="Episodio 01">EP. 01</a> <a class="chip" href="episodios/episodio-02.html" title="Episodio 02">EP. 02</a> <a class="chip" href="episodios/episodio-03.html" title="Episodio 03">EP. 03</a> <a class="chip" href="episodios/episodio-05.html" title="Episodio 05">EP. 05</a></p>
+          </article>
+        </li>
+        <li class="revelar revelar--retraso-2">
+          <article class="secundario">
+            <span class="secundario__sello" aria-hidden="true">NM</span>
+            <p class="meta">Sujeto secundario · Familia Maroni</p>
+            <h3 class="secundario__nombre">Nadia Maroni</h3>
+            <p class="secundario__actor">Interpretado por Shohreh Aghdashloo</p>
+            <p class="secundario__desc">Esposa de Salvatore. Maneja el negocio de los Maroni mientras él está preso.</p>
+            <p class="secundario__eps"><span class="visualmente-oculto">Aparece en: </span><a class="chip" href="episodios/episodio-02.html" title="Episodio 02">EP. 02</a> <a class="chip" href="episodios/episodio-03.html" title="Episodio 03">EP. 03</a> <a class="chip" href="episodios/episodio-05.html" title="Episodio 05">EP. 05</a></p>
+          </article>
+        </li>
+        <li class="revelar revelar--retraso-3">
+          <article class="secundario">
+            <span class="secundario__sello" aria-hidden="true">EK</span>
+            <p class="meta">Sujeto secundario · Sin familia</p>
+            <h3 class="secundario__nombre">Eve Karlo</h3>
+            <p class="secundario__actor">Interpretado por Carmen Ejogo</p>
+            <p class="secundario__desc">La confidente de Oz. Guarda secretos de medio Gotham.</p>
+            <p class="secundario__eps"><span class="visualmente-oculto">Aparece en: </span><a class="chip" href="episodios/episodio-01.html" title="Episodio 01">EP. 01</a> <a class="chip" href="episodios/episodio-06.html" title="Episodio 06">EP. 06</a> <a class="chip" href="episodios/episodio-08.html" title="Episodio 08">EP. 08</a></p>
+          </article>
+        </li>
+        <li class="revelar">
+          <article class="secundario">
+            <span class="secundario__sello" aria-hidden="true">JR</span>
+            <p class="meta">Sujeto secundario · Arkham</p>
+            <h3 class="secundario__nombre">Dr. Julian Rush</h3>
+            <p class="secundario__actor">Interpretado por Theo Rossi</p>
+            <p class="secundario__desc">Médico de Arkham y el único aliado de Sofia dentro y fuera del asilo.</p>
+            <p class="secundario__eps"><span class="visualmente-oculto">Aparece en: </span><a class="chip" href="episodios/episodio-04.html" title="Episodio 04">EP. 04</a> <a class="chip" href="episodios/episodio-07.html" title="Episodio 07">EP. 07</a> <a class="chip" href="episodios/episodio-08.html" title="Episodio 08">EP. 08</a></p>
+          </article>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ PIE ============ -->
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__cabeza">
+      <p class="pie__frase grunge">Gotham no<br>se salva.</p>
+      <ul class="pie__redes" role="list" aria-label="Redes sociales">
+        <li><a class="pie__red" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+        <li><a class="pie__red" href="#" aria-label="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+        <li><a class="pie__red" href="#" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a></li>
+        <li><a class="pie__red" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a></li>
+      </ul>
+    </div>
+    <div class="pie__base">
+      <span class="meta">Fan site no oficial · Proyecto Gotham Archive · Imágenes © HBO / Warner Bros. Discovery</span>
+      <ul class="pie__links" role="list">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="episodios.html">Episodios</a></li>
+        <li><a href="personajes.html" aria-current="page">Personajes</a></li>
+        <li><a href="galeria.html">Galería</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

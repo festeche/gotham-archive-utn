@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto · Gotham Archive — El Pingüino (2024)</title>
+  <meta name="description" content="Contacto del Gotham Archive, fan page de El Pingüino (HBO, 2024): mandá tu comentario, un dato para el archivo o un error que encontraste.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:title" content="Contacto · Gotham Archive">
+  <meta property="og:description" content="Enviá una señal: comentarios, datos y correcciones para el archivo. Fan page no oficial.">
+  <meta property="og:image" content="img/contacto-senal.webp">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Íconos de redes (Font Awesome, solo la fuente de marcas) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css">
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+<a class="saltar" href="#principal">Saltar al contenido</a>
+
+<!-- ============ CABECERA ============ -->
+<header class="cabecera">
+  <div class="contenedor cabecera__interior">
+    <a class="marca" href="index.html"><span class="marca__nombre">GOTHAM ARCHIVE</span><span class="marca__exp">EXP. N.º 2024-OZ</span></a>
+    <button class="nav__boton" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav"><span></span></button>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <ul class="nav__lista" role="list">
+        <li class="nav__item"><a class="nav__link" href="index.html">Inicio</a></li>
+        <li class="nav__item nav__item--sub">
+          <a class="nav__link" href="episodios.html">Episodios</a>
+          <ul class="submenu" role="list">
+            <li><a href="episodios/episodio-01.html"><span class="submenu__num">01</span>After Hours</a></li>
+            <li><a href="episodios/episodio-02.html"><span class="submenu__num">02</span>Inside Man</a></li>
+            <li><a href="episodios/episodio-03.html"><span class="submenu__num">03</span>Bliss</a></li>
+            <li><a href="episodios/episodio-04.html"><span class="submenu__num">04</span>Cent'Anni</a></li>
+            <li><a href="episodios/episodio-05.html"><span class="submenu__num">05</span>Homecoming</a></li>
+            <li><a href="episodios/episodio-06.html"><span class="submenu__num">06</span>Gold Summit</a></li>
+            <li><a href="episodios/episodio-07.html"><span class="submenu__num">07</span>Top Hat</a></li>
+            <li><a href="episodios/episodio-08.html"><span class="submenu__num">08</span>A Great or Little Thing</a></li>
+          </ul>
+        </li>
+        <li class="nav__item nav__item--sub">
+          <a class="nav__link" href="personajes.html">Personajes</a>
+          <ul class="submenu submenu--personajes" role="list">
+            <li><a href="personajes/oz-cobb.html"><span class="submenu__num">01</span>Oz Cobb</a></li>
+            <li><a href="personajes/sofia-falcone.html"><span class="submenu__num">02</span>Sofia Falcone</a></li>
+            <li><a href="personajes/salvatore-maroni.html"><span class="submenu__num">03</span>Salvatore Maroni</a></li>
+            <li><a href="personajes/victor-aguilar.html"><span class="submenu__num">04</span>Victor Aguilar</a></li>
+            <li><a href="personajes/francis-cobb.html"><span class="submenu__num">05</span>Francis Cobb</a></li>
+          </ul>
+        </li>
+        <li class="nav__item"><a class="nav__link" href="galeria.html">Galería</a></li>
+        <li class="nav__item"><a class="nav__link" href="contacto.html" aria-current="page">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="principal">
+
+  <!-- ============ CONTACTO: hero con la señal + formulario en papel ============
+       El formulario va a la izquierda, sobre el edificio oscuro: el papel
+       claro contrasta y deja libre el cielo con la señal (derecha). -->
+  <section class="contacto" aria-labelledby="contacto-titulo">
+    <img class="contacto__foto" src="img/contacto-senal.webp" alt="" width="1920" height="968">
+    <div class="contacto__resplandor" aria-hidden="true"></div>
+
+    <div class="contenedor contacto__grilla">
+      <form class="formulario contacto__form" id="formulario-contacto" action="#" method="post" novalidate>
+        <span class="sello grunge" aria-hidden="true">Confidencial</span>
+        <ol class="migas" role="list">
+          <li><a href="index.html">Inicio</a></li>
+          <li aria-current="page">Contacto</li>
+        </ol>
+        <p class="meta mt-4">Formulario N.º 2024-OZ · Denuncia anónima</p>
+        <h1 class="titulo grunge" id="contacto-titulo">Enviá una señal</h1>
+        <p class="formulario__intro maquina">¿Viste algo en Gotham? ¿Encontraste un error en el archivo o tenés un dato para sumar? Dejá tu mensaje. Alguien lo va a leer… y quizás responda.</p>
+
+        <div class="formulario__campos">
+          <div class="campos">
+            <div class="campo">
+              <label for="nombre">Nombre o alias</label>
+              <input id="nombre" name="nombre" type="text" autocomplete="name" placeholder="Ej: testigo del muelle" required maxlength="60" aria-describedby="error-nombre">
+              <span class="campo__error" id="error-nombre" aria-live="polite"></span>
+            </div>
+            <div class="campo">
+              <label for="correo">Correo electrónico</label>
+              <input id="correo" name="correo" type="email" autocomplete="email" placeholder="nombre@correo.com" required maxlength="100" aria-describedby="error-correo">
+              <span class="campo__error" id="error-correo" aria-live="polite"></span>
+            </div>
+            <div class="campo campo--completo">
+              <label for="asunto">Asunto <span class="campo__opcional">(opcional)</span></label>
+              <input id="asunto" name="asunto" type="text" list="asuntos-sugeridos" placeholder="Ej: Comentario sobre un episodio" maxlength="80">
+              <datalist id="asuntos-sugeridos">
+                <option value="Comentario sobre un episodio">
+                <option value="Error en el archivo">
+                <option value="Dato para sumar al archivo">
+                <option value="Sugerencia para el sitio">
+              </datalist>
+            </div>
+            <div class="campo campo--completo">
+              <label for="mensaje">Mensaje</label>
+              <textarea id="mensaje" name="mensaje" placeholder="Contanos lo que viste…" required minlength="10" maxlength="1000" aria-describedby="error-mensaje contador-mensaje"></textarea>
+              <span class="campo__pie">
+                <span class="campo__error" id="error-mensaje" aria-live="polite"></span>
+                <span class="campo__contador" id="contador-mensaje">0 / 1000</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="formulario__acciones">
+            <p class="formulario__aviso">Tu identidad queda protegida por el archivo.</p>
+            <button class="btn btn--solido" type="submit">Encender la señal <span class="btn__flecha" aria-hidden="true">→</span></button>
+          </div>
+        </div>
+
+        <!-- Estado "enviado" (lo muestra el JS) -->
+        <div class="formulario__enviado" hidden tabindex="-1">
+          <span class="sello sello--grande grunge">Señal enviada</span>
+          <p class="formulario__gracias maquina">Gracias, <span data-nombre-enviado>testigo</span>. Tu mensaje ya está en el cielo de Gotham. Si alguien lo ve, vas a tener noticias.</p>
+          <p class="formulario__nota">Proyecto fan sin servidor: por ahora, los mensajes no se guardan ni se envían a ningún lado.</p>
+          <button class="btn" type="button" data-otra-senal>Enviar otra señal</button>
+        </div>
+      </form>
+
+      <p class="contacto__leyenda"><span class="meta meta--rojo contacto__estado">Señal activa</span><span class="maquina">Alguien está mirando la ciudad esta noche.</span></p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ PIE ============ -->
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__cabeza">
+      <p class="pie__frase grunge">Gotham no<br>se salva.</p>
+      <ul class="pie__redes" role="list" aria-label="Redes sociales">
+        <li><a class="pie__red" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+        <li><a class="pie__red" href="#" aria-label="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+        <li><a class="pie__red" href="#" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a></li>
+        <li><a class="pie__red" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a></li>
+      </ul>
+    </div>
+    <div class="pie__base">
+      <span class="meta">Fan site no oficial · Proyecto Gotham Archive · Imágenes © HBO / Warner Bros. Discovery</span>
+      <ul class="pie__links" role="list">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="episodios.html">Episodios</a></li>
+        <li><a href="personajes.html">Personajes</a></li>
+        <li><a href="galeria.html">Galería</a></li>
+        <li><a href="contacto.html" aria-current="page">Contacto</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

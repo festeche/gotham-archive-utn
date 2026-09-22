@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gotham Archive — Wireframe de dirección visual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik:ital,wght@0,400;0,500;0,700;1,400&family=Special+Elite&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0b0b0a; --graphite:#131312; --concrete:#1c1c1a; --cement:#2c2c29;
+  --line:rgba(232,224,208,.12); --paper:#e8e0d0; --muted:#9a9486;
+  --red:#ef1a2d; --red-deep:#8a211b; --gold:#d8bf86;
+  --f-display:'Bebas Neue',Impact,sans-serif; --f-body:'Rubik',system-ui,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,monospace; --f-type:'Special Elite','Courier New',monospace;
+  /* textura "tinta gastada" para títulos y sellos */
+  --grunge:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' seed='4'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -22 0 0 0 16.2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --noise:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='g' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+  --concrete-tex:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><filter id='c' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='.012 .02' numOctaves='5' seed='9' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23c)' opacity='.28'/></svg>");
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--ink);color:var(--paper);font:16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+body{padding:0 16px 80px}
+a{color:inherit;text-decoration:none}
+/* jerarquía de énfasis */
+.prose b,b.term{color:var(--gold);font-weight:500}                     /* oro: resalte liviano, respiro visual */
+.prose strong,strong.key{color:#fff6e8;font-weight:700;box-shadow:inset 0 -.2em 0 rgba(239,26,45,.6)} /* clave: 1 vez por término */
+.prose a{color:var(--paper);border-bottom:1px dashed var(--red);transition:color .2s}
+.prose a:hover{color:var(--red)}
+
+/* ---------- film grain global ---------- */
+body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:50;background:var(--noise);opacity:.09;mix-blend-mode:overlay;animation:grain 1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+
+/* ---------- utilidades de estilo ---------- */
+.grunge{-webkit-mask-image:var(--grunge);mask-image:var(--grunge);-webkit-mask-size:300px;mask-size:300px}
+.h-red{font-family:var(--f-display);color:var(--red);letter-spacing:.02em;line-height:.9;text-transform:uppercase}
+.mono{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.type{font-family:var(--f-type)}
+.stamp{display:inline-block;font-family:var(--f-mono);font-weight:600;font-size:.72rem;letter-spacing:.22em;color:var(--red);border:2px solid var(--red);outline:1px solid var(--red);outline-offset:3px;padding:3px 10px;transform:rotate(-4deg);text-transform:uppercase}
+.redact{background:var(--paper);color:transparent;padding:0 .2em;cursor:help;transition:.25s;border-radius:1px}
+.redact:hover{background:transparent;color:var(--red)}
+.ph{background:repeating-linear-gradient(135deg,#1a1a18 0 10px,#161614 10px 20px);border:1px solid var(--cement);display:grid;place-items:center;color:#55534c;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:8px}
+
+/* ---------- board / anotaciones ---------- */
+.board{max-width:1200px;margin:0 auto}
+.board-head{padding:56px 0 24px;border-bottom:1px solid var(--line);margin-bottom:40px}
+.board-head h1{font-size:clamp(3rem,8vw,6rem)}
+.board-head p{max-width:720px;color:var(--muted);margin-top:12px}
+.frame-label{display:flex;align-items:center;gap:14px;margin:72px 0 14px}
+.frame-label b{font-family:var(--f-display);font-size:1.6rem;font-weight:400;letter-spacing:.04em}
+.frame-label .file{font-family:var(--f-mono);font-size:.7rem;color:var(--red);border:1px solid var(--red-deep);padding:2px 8px}
+.frame{border:1px solid var(--cement);background:var(--ink);position:relative;overflow:hidden}
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 28px;margin-top:18px}
+.note{display:flex;gap:10px;font-size:.88rem;color:var(--muted)}
+.note i{flex:none;width:22px;height:22px;border-radius:50%;background:var(--red);color:var(--ink);font:600 .72rem/22px var(--f-mono);text-align:center;font-style:normal}
+.pin{position:absolute;width:24px;height:24px;border-radius:50%;background:var(--red);color:var(--ink);font:600 .72rem/24px var(--f-mono);text-align:center;z-index:5;box-shadow:0 0 0 4px rgba(239,26,45,.25)}
+
+/* ---------- sistema: paleta / tipografía / texturas ---------- */
+.system{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.card{border:1px solid var(--cement);padding:20px;background:var(--graphite)}
+.card h3{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.2em;color:var(--red);font-weight:600;margin-bottom:14px}
+.swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sw{aspect-ratio:1;border:1px solid var(--line);display:flex;align-items:flex-end;padding:5px;font:600 .58rem var(--f-mono);letter-spacing:.05em}
+.tex{height:84px;border:1px solid var(--line);margin-bottom:8px;position:relative}
+.tex span{position:absolute;left:8px;bottom:6px}
+
+/* ---------- componentes del sitio ---------- */
+.site-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 28px;border-bottom:1px solid var(--line);background:rgba(11,11,10,.9);flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:12px}
+.brand b{font-family:var(--f-display);font-weight:400;font-size:1.7rem;letter-spacing:.06em;color:var(--paper)}
+.brand small{font-family:var(--f-mono);font-size:.66rem;color:var(--red)}
+.nav{display:flex;gap:22px;flex-wrap:wrap}
+.nav a{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.16em;color:var(--muted);padding-bottom:4px;border-bottom:2px solid transparent}
+.nav a.on{color:var(--paper);border-color:var(--red)}
+
+.hero{position:relative;min-height:620px;display:flex;align-items:flex-end;padding:64px 28px 56px;background:#0b0b0a;overflow:hidden;isolation:isolate}
+.hero .skyline{position:absolute;inset:0;width:100%;height:100%;z-index:-3}
+.hero .photo{position:absolute;inset:0;z-index:-2;background:url(../img/hero-gotham.jpg) center/cover no-repeat;filter:grayscale(.35) contrast(1.1) brightness(.8)}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:
+  linear-gradient(90deg,rgba(11,11,10,.92) 0%,rgba(11,11,10,.55) 45%,rgba(11,11,10,.1) 100%),
+  linear-gradient(0deg,#0b0b0a 0%,transparent 35%)}
+.hero::after{content:"";position:absolute;inset:-40px;z-index:-1;pointer-events:none;opacity:.14;
+  background:repeating-linear-gradient(100deg,transparent 0 22px,rgba(232,224,208,.5) 22px 23px,transparent 23px 61px);
+  animation:rain .5s linear infinite}
+@keyframes rain{to{transform:translate(-8px,40px)}}
+.beacon{animation:blink 2.4s steps(1) infinite}
+@keyframes blink{50%{opacity:.15}}
+.hero-inner{max-width:640px}
+.hero .logo{display:block;width:min(560px,90%);height:auto;filter:drop-shadow(0 10px 30px rgba(0,0,0,.8))}
+.hero .tagline{font-family:var(--f-display);font-size:clamp(1.3rem,2.6vw,1.9rem);letter-spacing:.34em;color:var(--paper);margin-top:14px}
+.hero .lede{max-width:520px;margin-top:18px;border-left:2px solid var(--red);padding-left:16px;color:#cfc7b7}
+.hero .meta{display:flex;gap:14px;align-items:center;margin-bottom:22px;flex-wrap:wrap}
+.btn{display:inline-flex;gap:10px;align-items:center;margin-top:28px;font-family:var(--f-mono);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--paper);border:1px solid var(--red);padding:12px 22px;transition:.2s}
+.btn:hover{background:var(--red);color:var(--ink)}
+.evidence{position:relative;background:#d9d1c1;padding:12px 12px 44px;transform:rotate(2deg);box-shadow:0 30px 60px rgba(0,0,0,.7);max-width:320px;justify-self:center}
+.evidence .ph{aspect-ratio:2/3;background:repeating-linear-gradient(135deg,#222 0 10px,#1b1b1b 10px 20px)}
+.evidence .cap{position:absolute;left:14px;bottom:12px;font-family:var(--f-type);color:#2a2a28;font-size:.85rem}
+.tape{position:absolute;width:110px;height:28px;background:rgba(216,191,134,.55);top:-12px;left:50%;transform:translateX(-50%) rotate(-3deg)}
+.evidence .stamp{position:absolute;right:-18px;bottom:60px;background:rgba(11,11,10,.0);transform:rotate(-12deg);font-size:.9rem}
+
+.ticker{background:var(--red);color:var(--ink);overflow:hidden;white-space:nowrap;border-block:1px solid #000}
+.ticker div{display:inline-block;padding:8px 0;font:600 .76rem var(--f-mono);letter-spacing:.2em;animation:tick 28s linear infinite}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+.fan,.folders,.people{position:relative}
+.fan{display:grid;grid-template-columns:1fr 280px;gap:40px;padding:56px 28px;background:var(--ink)}
+.fan h3{font-size:clamp(2.4rem,5vw,3.6rem);margin-bottom:22px}
+.fan p{margin-bottom:18px;color:#ddd5c5;max-width:640px}
+.evidence img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+.fan figcaption{font-size:.82rem;color:var(--muted);margin-top:8px}
+
+.folders{padding:56px 28px;background:linear-gradient(180deg,var(--graphite) 0%,var(--graphite) 45%,#0f191a 100%)}
+.row-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+.row-head h3{font-size:clamp(2.4rem,5vw,3.6rem)}
+.folder-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px 18px}
+.folder{position:relative;background:#2a2721;border:1px solid #3a362d;padding:18px 14px 14px;margin-top:18px;transition:transform .25s,border-color .25s;cursor:pointer}
+.folder::before{content:attr(data-ep);position:absolute;top:-19px;left:-1px;background:#2a2721;border:1px solid #3a362d;border-bottom:0;padding:1px 12px;font:600 .66rem/16px var(--f-mono);letter-spacing:.14em;color:var(--gold)}
+.folder:hover{transform:translateY(-6px) rotate(-.6deg);border-color:var(--red)}
+.folder .ph{aspect-ratio:16/10;margin-bottom:12px}
+.folder b{display:block;font-family:var(--f-display);font-weight:400;font-size:1.5rem;letter-spacing:.03em;line-height:1}
+.folder span{font-family:var(--f-type);font-size:.78rem;color:var(--muted)}
+
+:root{--water:#58a4a8;--deep:#081315;
+  --caustic:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500'><filter id='k' x='0' y='0' width='100%' height='100%'><feTurbulence type='turbulence' baseFrequency='.012' numOctaves='2' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .68  0 0 0 0 .7  -8 0 0 0 1'/></filter><rect width='100%' height='100%' filter='url(%23k)'/></svg>")}
+.floodmark{position:relative;height:0;border-top:1px dashed rgba(88,164,168,.7);z-index:2}
+.floodmark span{position:absolute;left:28px;top:-11px;background:var(--ink);padding:2px 10px;font:600 .64rem var(--f-mono);letter-spacing:.2em;color:var(--water);text-transform:uppercase}
+.people{padding:72px 28px 110px;background:linear-gradient(180deg,#0f191a 0%,#0b1617 60%,var(--deep) 100%);overflow:hidden}
+.people::before,.foot::before{content:"";position:absolute;inset:0;pointer-events:none;background:var(--caustic);background-size:500px;mix-blend-mode:screen;animation:caustic 26s linear infinite}
+.people::before{opacity:.07;-webkit-mask-image:linear-gradient(transparent 20%,#000);mask-image:linear-gradient(transparent 20%,#000)}
+@keyframes caustic{to{background-position:500px 250px}}
+.people > :not(.pin){position:relative}
+.people-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.pcard{border:2px solid var(--red);background:var(--graphite);box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.pcard .ph{aspect-ratio:4/3;border:0}
+.pcard div{padding:12px}
+.pcard b{font-family:var(--f-display);font-weight:400;font-size:1.4rem;letter-spacing:.03em;display:block;line-height:1}
+.pcard small{color:var(--gold);font-size:.8rem}
+
+.foot{position:relative;padding:40px 28px 28px;background:linear-gradient(180deg,var(--deep),#050c0d)}
+.foot::before{opacity:.09}
+.foot > :not(.wave){position:relative}
+.wave{position:absolute!important;left:0;top:-38px;width:200%;height:40px;animation:wave 14s linear infinite}
+.wave.back{top:-46px;opacity:.5;animation-duration:22s;animation-direction:reverse}
+@keyframes wave{to{transform:translateX(-50%)}}
+.foot .big{font-family:var(--f-display);font-size:clamp(3rem,9vw,7rem);line-height:.85;color:#1d3a3d;animation:bob 6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(6px)}}
+.foot .bottom{display:flex;justify-content:space-between;gap:16px;margin-top:28px;padding-top:18px;border-top:1px solid rgba(88,164,168,.2);flex-wrap:wrap}
+.foot .mono{color:#6f9194}
+
+/* medidor "nivel del agua" (progreso de scroll) */
+.water{position:absolute;right:10px;top:90px;bottom:24px;width:6px;background:rgba(232,224,208,.06);z-index:4}
+.water::after{content:"";position:absolute;left:0;right:0;bottom:0;height:var(--lvl,35%);transition:height .15s linear;background:linear-gradient(to top,#2f5f64,#58a4a8);box-shadow:0 0 12px rgba(88,164,168,.5)}
+.water small{position:absolute;right:12px;top:0;writing-mode:vertical-rl;font:600 .58rem var(--f-mono);letter-spacing:.2em;color:var(--muted)}
+
+/* ---------- episodio (detalle) ---------- */
+.report{display:grid;grid-template-columns:280px 1fr;background:var(--ink)}
+.dossier-side{background:#d9d1c1;color:#1e1d1a;padding:28px 22px;position:relative;background-image:var(--concrete-tex)}
+.dossier-side .mono{color:#5f5a50}
+.dossier-side dl{margin-top:16px;font-family:var(--f-type);font-size:.9rem}
+.dossier-side dt{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.18em;color:var(--red-deep);margin-top:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chips span{font:600 .64rem var(--f-mono);letter-spacing:.1em;border:1px solid #1e1d1a;padding:2px 7px}
+.report-main{padding:36px 32px}
+.report-main h2{font-size:clamp(3rem,7vw,5.6rem)}
+.report-main h4{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.2em;color:var(--red);margin:30px 0 12px;font-weight:600}
+.report-main p{color:#ddd5c5;max-width:680px}
+.ev-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ev-row .ph{aspect-ratio:4/3}
+.tl{border-left:2px solid var(--red);padding-left:18px;display:grid;gap:12px;max-width:640px}
+.tl div{position:relative;color:#cfc7b7;font-size:.92rem}
+.tl div::before{content:"";position:absolute;left:-25px;top:8px;width:12px;height:12px;background:var(--ink);border:2px solid var(--red);border-radius:50%}
+.tl b{font-family:var(--f-mono);font-size:.7rem;color:var(--gold);letter-spacing:.12em;margin-right:8px}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:36px;padding-top:18px;border-top:1px dashed var(--cement);flex-wrap:wrap}
+
+/* ---------- episodios (índice) ---------- */
+.index{padding:40px 28px;background:var(--graphite)}
+.index-table{width:100%;border-collapse:collapse;margin-top:24px}
+.index-table td,.index-table th{padding:14px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+.index-table th{font:600 .66rem var(--f-mono);letter-spacing:.18em;color:var(--muted)}
+.index-table tr{transition:background .2s}
+.index-table tbody tr:hover{background:rgba(239,26,45,.08)}
+.index-table tbody tr:hover .ep-t{color:var(--red)}
+.ep-n{font:600 1rem var(--f-mono);color:var(--red)}
+.ep-t{font-family:var(--f-display);font-size:1.7rem;letter-spacing:.03em;transition:color .2s}
+.tbl-wrap{overflow-x:auto}
+
+/* ---------- personajes: tablero ---------- */
+.corkboard{position:relative;height:560px;background:
+  radial-gradient(500px 300px at 50% 45%,rgba(239,26,45,.08),transparent 70%),var(--concrete-tex),#1a1917}
+.polaroid{position:absolute;width:150px;background:#ddd5c4;padding:8px 8px 30px;box-shadow:0 14px 30px rgba(0,0,0,.6);transition:transform .25s;cursor:pointer}
+.polaroid:hover{transform:scale(1.06) rotate(0deg)!important;z-index:3}
+.polaroid .ph{aspect-ratio:1;background:repeating-linear-gradient(135deg,#262624 0 8px,#1f1f1d 8px 16px)}
+.polaroid b{position:absolute;left:10px;bottom:7px;font-family:var(--f-type);color:#1e1d1a;font-size:.82rem;font-weight:400}
+.polaroid::before{content:"";position:absolute;top:-6px;left:50%;width:12px;height:12px;border-radius:50%;background:var(--red);transform:translateX(-50%);box-shadow:0 2px 3px rgba(0,0,0,.6);z-index:2}
+.strings{position:absolute;inset:0;width:100%;height:100%}
+
+@media (max-width:820px){
+  .fan,.report{grid-template-columns:1fr}
+  .hero{min-height:520px}
+  .folder-grid,.people-grid{grid-template-columns:repeat(2,1fr)}
+  .ev-row{grid-template-columns:1fr 1fr}
+  .corkboard{height:auto;display:flex;flex-wrap:wrap;gap:24px;padding:30px 16px;justify-content:center}
+  .polaroid{position:relative;left:auto!important;top:auto!important}
+  .strings{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="board">
+
+  <header class="board-head">
+    <p class="mono">Gotham Archive · Propuesta de dirección visual · Wireframe v2</p>
+    <h1 class="h-red grunge">Archivo rojo</h1>
+    <p class="prose">Base de <b>grafito y concreto</b> con film grain (el "expediente"), y el <strong>rojo del logo</strong> como color de tinta: títulos, sellos, hilos y tachones. En la segunda mitad de la home <b>sube el agua</b>. Las fotos son placeholders. Pasá el mouse por los <span class="redact">textos censurados</span>, las carpetas y los polaroids.</p>
+  </header>
+
+  <!-- ============ SISTEMA ============ -->
+  <div class="frame-label"><span class="file">00</span><b>Sistema visual</b></div>
+  <div class="system">
+    <div class="card">
+      <h3>PALETA</h3>
+      <div class="swatches">
+        <div class="sw" style="background:#0b0b0a">INK</div>
+        <div class="sw" style="background:#131312">GRAFITO</div>
+        <div class="sw" style="background:#2c2c29">CEMENTO</div>
+        <div class="sw" style="background:#e8e0d0;color:#111">PAPEL</div>
+        <div class="sw" style="background:#ef1a2d;color:#111">ROJO LOGO</div>
+        <div class="sw" style="background:#8a211b">SANGRE</div>
+        <div class="sw" style="background:#d8bf86;color:#111">ORO</div>
+        <div class="sw" style="background:#2f5f64">AGUA</div>
+      </div>
+      <p class="mono" style="margin-top:12px;letter-spacing:.06em;text-transform:none">Rojo = el del logo (#EF1A2D), para titulares y acentos. Oro = resalte de términos. Agua = motivo de la inundación, de la mitad de la página hacia abajo.</p>
+    </div>
+    <div class="card">
+      <h3>TIPOGRAFÍA</h3>
+      <div class="h-red grunge" style="font-size:2.6rem">La ciudad será suya</div>
+      <p class="mono" style="margin:4px 0 12px">Bebas Neue + máscara "tinta gastada"</p>
+      <p class="prose" style="font-size:.95rem">Rubik para el cuerpo. Énfasis en 3 niveles: <b>término en oro</b> (resalte liviano), <strong>término clave</strong> (una sola vez) y <a href="#">link</a> (solo si lleva a otra página).</p>
+      <p class="type" style="margin-top:10px;color:var(--muted)">Special Elite: notas a máquina, pies de foto, fichas.</p>
+      <p class="mono" style="margin-top:10px">IBM Plex Mono · metadatos · nav · códigos</p>
+    </div>
+    <div class="card">
+      <h3>TEXTURAS Y MOTIVOS</h3>
+      <div class="tex" style="background:var(--concrete-tex),var(--graphite)"><span class="mono">Concreto (SVG, 0 KB de imagen)</span></div>
+      <div class="tex" style="background:var(--graphite);overflow:hidden"><div style="position:absolute;inset:0;background:var(--noise);opacity:.35;mix-blend-mode:overlay"></div><span class="mono">Film grain animado (overlay global)</span></div>
+      <div style="display:flex;gap:18px;align-items:center;margin-top:14px;flex-wrap:wrap">
+        <span class="stamp grunge">Clasificado</span>
+        <span class="stamp grunge" style="transform:rotate(3deg)">Evidencia</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HOME ============ -->
+  <div class="frame-label"><span class="file">01</span><b>index.html — Home</b></div>
+  <div class="frame">
+    <span class="pin" style="left:18px;top:62px">1</span>
+    <span class="pin" style="right:40px;top:130px">2</span>
+    <span class="pin" style="left:18px;top:140px;background:var(--gold);box-shadow:0 0 0 4px rgba(216,191,134,.25)">A</span>
+    <div class="water" style="--lvl:22%"><small>NIVEL DEL AGUA</small></div>
+
+    <header class="site-header">
+      <div class="brand"><b>GOTHAM ARCHIVE</b><small>EXP. N.º 2024-OZ</small></div>
+      <nav class="nav"><a class="on" href="#">Index</a><a href="#">Episodios</a><a href="#">Personajes</a><a href="#">Galería</a><a href="#">Contacto</a></nav>
+    </header>
+
+    <section class="hero">
+      <svg class='skyline' viewBox='0 0 1400 560' preserveAspectRatio='xMidYMax slice' aria-hidden='true'><defs><linearGradient id='sky' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#0b0b0a'/><stop offset='.55' stop-color='#1b0d0c'/><stop offset='.85' stop-color='#3a1210'/><stop offset='1' stop-color='#1a0908'/></linearGradient><linearGradient id='fog' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#6b2a24' stop-opacity='0'/><stop offset='1' stop-color='#6b2a24' stop-opacity='.35'/></linearGradient></defs><rect width='1400' height='560' fill='url(#sky)'/><g><path d='M-20 560V342H40V560Z' fill='#1e1614'/><path d='M42 560V262H83V560Z' fill='#1e1614'/><path d='M86 560V351H133V560Z' fill='#1e1614'/><path d='M139 560V359H220V560Z' fill='#1e1614'/><path d='M226 560V216H275V560Z' fill='#1e1614'/><path d='M276 560V362H316V560Z' fill='#1e1614'/><path d='M322 560V281H400V560Z' fill='#1e1614'/><path d='M403 560V240H418.0V215H463.0V240H478V560Z' fill='#1e1614'/><path d='M479 560V332H491.2V307H527.8V332H540V560Z' fill='#1e1614'/><path d='M540 560V239H610V560Z' fill='#1e1614'/><path d='M616 560V222H670V560Z' fill='#1e1614'/><path d='M672 560V380H758V560Z' fill='#1e1614'/><path d='M761 560V203H841V560Z' fill='#1e1614'/><path d='M846 560V213H932V560Z' fill='#1e1614'/><path d='M934 560V299H986V560Z' fill='#1e1614'/><path d='M990 560V265H1045V560Z' fill='#1e1614'/><path d='M1049 560V332H1059.4V307H1090.6V332H1101V560Z' fill='#1e1614'/><path d='M1101 560V373H1176V560Z' fill='#1e1614'/><path d='M1180 560V345H1231V560Z' fill='#1e1614'/><path d='M1235 560V376L1255.5 344L1276 376V560Z' fill='#1e1614'/><path d='M1280 560V278H1340V560Z' fill='#1e1614'/><path d='M1346 560V248L1374.5 198L1403 248V560Z' fill='#1e1614'/><path d='M1403 560V377H1480V560Z' fill='#1e1614'/></g><g fill='#d8bf86' opacity='0.18'><rect x='-14' y='352' width='4' height='6'/><rect x='6' y='394' width='4' height='6'/><rect x='58' y='370' width='4' height='6'/><rect x='102' y='389' width='4' height='6'/><rect x='112' y='403' width='4' height='6'/><rect x='92' y='487' width='4' height='6'/><rect x='102' y='487' width='4' height='6'/><rect x='155' y='397' width='4' height='6'/><rect x='185' y='411' width='4' height='6'/><rect x='205' y='425' width='4' height='6'/><rect x='195' y='495' width='4' height='6'/><rect x='155' y='509' width='4' height='6'/><rect x='232' y='282' width='4' height='6'/><rect x='262' y='282' width='4' height='6'/><rect x='242' y='324' width='4' height='6'/><rect x='232' y='478' width='4' height='6'/><rect x='252' y='478' width='4' height='6'/><rect x='282' y='414' width='4' height='6'/><rect x='282' y='428' width='4' height='6'/><rect x='302' y='442' width='4' height='6'/><rect x='338' y='319' width='4' height='6'/><rect x='338' y='333' width='4' height='6'/><rect x='328' y='347' width='4' height='6'/><rect x='348' y='389' width='4' height='6'/><rect x='378' y='501' width='4' height='6'/><rect x='378' y='543' width='4' height='6'/><rect x='429' y='320' width='4' height='6'/><rect x='459' y='404' width='4' height='6'/><rect x='419' y='418' width='4' height='6'/><rect x='409' y='446' width='4' height='6'/><rect x='429' y='460' width='4' height='6'/><rect x='449' y='488' width='4' height='6'/><rect x='449' y='530' width='4' height='6'/><rect x='505' y='342' width='4' height='6'/><rect x='515' y='356' width='4' height='6'/><rect x='525' y='384' width='4' height='6'/><rect x='495' y='412' width='4' height='6'/><rect x='485' y='426' width='4' height='6'/><rect x='495' y='426' width='4' height='6'/><rect x='485' y='468' width='4' height='6'/><rect x='485' y='482' width='4' height='6'/><rect x='546' y='333' width='4' height='6'/><rect x='556' y='333' width='4' height='6'/><rect x='546' y='375' width='4' height='6'/><rect x='586' y='375' width='4' height='6'/><rect x='546' y='389' width='4' height='6'/><rect x='566' y='389' width='4' height='6'/><rect x='596' y='403' width='4' height='6'/><rect x='596' y='445' width='4' height='6'/><rect x='566' y='529' width='4' height='6'/><rect x='632' y='260' width='4' height='6'/><rect x='662' y='260' width='4' height='6'/><rect x='642' y='302' width='4' height='6'/><rect x='642' y='344' width='4' height='6'/><rect x='662' y='442' width='4' height='6'/><rect x='652' y='526' width='4' height='6'/><rect x='728' y='390' width='4' height='6'/><rect x='678' y='404' width='4' height='6'/><rect x='718' y='418' width='4' height='6'/><rect x='748' y='446' width='4' height='6'/><rect x='688' y='460' width='4' height='6'/><rect x='807' y='213' width='4' height='6'/><rect x='817' y='213' width='4' height='6'/><rect x='767' y='241' width='4' height='6'/><rect x='827' y='241' width='4' height='6'/><rect x='787' y='255' width='4' height='6'/><rect x='807' y='255' width='4' height='6'/><rect x='797' y='283' width='4' height='6'/><rect x='817' y='311' width='4' height='6'/><rect x='767' y='339' width='4' height='6'/><rect x='807' y='339' width='4' height='6'/><rect x='817' y='437' width='4' height='6'/><rect x='817' y='521' width='4' height='6'/><rect x='807' y='535' width='4' height='6'/><rect x='767' y='549' width='4' height='6'/><rect x='872' y='265' width='4' height='6'/><rect x='892' y='307' width='4' height='6'/><rect x='872' y='377' width='4' height='6'/><rect x='902' y='405' width='4' height='6'/><rect x='912' y='405' width='4' height='6'/><rect x='892' y='475' width='4' height='6'/><rect x='852' y='503' width='4' height='6'/><rect x='862' y='517' width='4' height='6'/><rect x='960' y='337' width='4' height='6'/><rect x='970' y='379' width='4' height='6'/><rect x='940' y='421' width='4' height='6'/><rect x='970' y='435' width='4' height='6'/><rect x='940' y='449' width='4' height='6'/><rect x='940' y='533' width='4' height='6'/><rect x='1036' y='303' width='4' height='6'/><rect x='996' y='317' width='4' height='6'/><rect x='1036' y='429' width='4' height='6'/><rect x='996' y='457' width='4' height='6'/><rect x='1085' y='384' width='4' height='6'/><rect x='1085' y='454' width='4' height='6'/><rect x='1055' y='468' width='4' height='6'/><rect x='1107' y='383' width='4' height='6'/><rect x='1117' y='425' width='4' height='6'/><rect x='1147' y='425' width='4' height='6'/><rect x='1137' y='537' width='4' height='6'/><rect x='1107' y='551' width='4' height='6'/><rect x='1206' y='397' width='4' height='6'/><rect x='1186' y='467' width='4' height='6'/><rect x='1186' y='537' width='4' height='6'/><rect x='1261' y='484' width='4' height='6'/><rect x='1251' y='512' width='4' height='6'/><rect x='1306' y='316' width='4' height='6'/><rect x='1296' y='344' width='4' height='6'/><rect x='1316' y='470' width='4' height='6'/><rect x='1392' y='314' width='4' height='6'/><rect x='1382' y='370' width='4' height='6'/><rect x='1352' y='412' width='4' height='6'/><rect x='1382' y='412' width='4' height='6'/><rect x='1392' y='524' width='4' height='6'/><rect x='1352' y='538' width='4' height='6'/><rect x='1469' y='415' width='4' height='6'/><rect x='1459' y='457' width='4' height='6'/><rect x='1419' y='541' width='4' height='6'/></g><rect y='300' width='1400' height='260' fill='url(#fog)'/><g><path d='M-20 560V269L39.5 221L99 269V560Z' fill='#0d0c0b'/><path d='M105 560V458H206V560Z' fill='#0d0c0b'/><path d='M211 560V422H221.6V397H253.4V422H264V560Z' fill='#0d0c0b'/><path d='M268 560V367H279.4V342H313.6V367H325V560Z' fill='#0d0c0b'/><path d='M328 560V314H407V560Z' fill='#0d0c0b'/><path d='M413 560V267L464.5 207L516 267V560Z' fill='#0d0c0b'/><path d='M517 560V301L554.5 242L592 301V560Z' fill='#0d0c0b'/><path d='M595 560V454H667V560Z' fill='#0d0c0b'/><path d='M667 560V393H684.8V368H738.2V393H756V560Z' fill='#0d0c0b'/><path d='M756 560V439H851V560Z' fill='#0d0c0b'/><line x1='803.5' y1='439' x2='803.5' y2='389' stroke='#0d0c0b' stroke-width='2'/><circle class='beacon' cx='803.5' cy='389' r='2.4' fill='#ef1a2d'/><path d='M852 560V342H875.6V317H946.4V342H970V560Z' fill='#0d0c0b'/><line x1='911.0' y1='342' x2='911.0' y2='292' stroke='#0d0c0b' stroke-width='2'/><circle class='beacon' cx='911.0' cy='292' r='2.4' fill='#ef1a2d'/><path d='M973 560V339H1032V560Z' fill='#0d0c0b'/><path d='M1033 560V342H1140V560Z' fill='#0d0c0b'/><path d='M1145 560V273H1160.0V248H1205.0V273H1220V560Z' fill='#0d0c0b'/><path d='M1226 560V451H1344V560Z' fill='#0d0c0b'/><path d='M1346 560V334L1376.0 312L1406 334V560Z' fill='#0d0c0b'/><path d='M1410 560V301H1427.8V276H1481.2V301H1499V560Z' fill='#0d0c0b'/><line x1='1454.5' y1='301' x2='1454.5' y2='251' stroke='#0d0c0b' stroke-width='2'/><circle class='beacon' cx='1454.5' cy='251' r='2.4' fill='#ef1a2d'/></g><g fill='#d8bf86' opacity='0.45'><rect x='36' y='307' width='4' height='6'/><rect x='66' y='307' width='4' height='6'/><rect x='26' y='321' width='4' height='6'/><rect x='26' y='349' width='4' height='6'/><rect x='76' y='391' width='4' height='6'/><rect x='86' y='447' width='4' height='6'/><rect x='66' y='475' width='4' height='6'/><rect x='86' y='475' width='4' height='6'/><rect x='86' y='489' width='4' height='6'/><rect x='86' y='517' width='4' height='6'/><rect x='66' y='545' width='4' height='6'/><rect x='121' y='482' width='4' height='6'/><rect x='161' y='482' width='4' height='6'/><rect x='191' y='524' width='4' height='6'/><rect x='274' y='377' width='4' height='6'/><rect x='304' y='433' width='4' height='6'/><rect x='294' y='475' width='4' height='6'/><rect x='284' y='517' width='4' height='6'/><rect x='294' y='531' width='4' height='6'/><rect x='334' y='366' width='4' height='6'/><rect x='334' y='506' width='4' height='6'/><rect x='344' y='506' width='4' height='6'/><rect x='344' y='520' width='4' height='6'/><rect x='364' y='520' width='4' height='6'/><rect x='344' y='534' width='4' height='6'/><rect x='374' y='534' width='4' height='6'/><rect x='394' y='534' width='4' height='6'/><rect x='354' y='548' width='4' height='6'/><rect x='469' y='277' width='4' height='6'/><rect x='449' y='291' width='4' height='6'/><rect x='509' y='305' width='4' height='6'/><rect x='429' y='375' width='4' height='6'/><rect x='449' y='375' width='4' height='6'/><rect x='459' y='389' width='4' height='6'/><rect x='469' y='389' width='4' height='6'/><rect x='449' y='417' width='4' height='6'/><rect x='419' y='431' width='4' height='6'/><rect x='459' y='431' width='4' height='6'/><rect x='419' y='473' width='4' height='6'/><rect x='479' y='473' width='4' height='6'/><rect x='499' y='473' width='4' height='6'/><rect x='449' y='487' width='4' height='6'/><rect x='509' y='501' width='4' height='6'/><rect x='449' y='515' width='4' height='6'/><rect x='499' y='515' width='4' height='6'/><rect x='533' y='311' width='4' height='6'/><rect x='533' y='325' width='4' height='6'/><rect x='523' y='409' width='4' height='6'/><rect x='523' y='465' width='4' height='6'/><rect x='553' y='465' width='4' height='6'/><rect x='563' y='493' width='4' height='6'/><rect x='533' y='549' width='4' height='6'/><rect x='651' y='464' width='4' height='6'/><rect x='601' y='506' width='4' height='6'/><rect x='641' y='506' width='4' height='6'/><rect x='621' y='534' width='4' height='6'/><rect x='673' y='431' width='4' height='6'/><rect x='683' y='431' width='4' height='6'/><rect x='713' y='431' width='4' height='6'/><rect x='733' y='459' width='4' height='6'/><rect x='733' y='487' width='4' height='6'/><rect x='802' y='449' width='4' height='6'/><rect x='802' y='477' width='4' height='6'/><rect x='802' y='505' width='4' height='6'/><rect x='812' y='505' width='4' height='6'/><rect x='842' y='519' width='4' height='6'/><rect x='792' y='547' width='4' height='6'/><rect x='868' y='352' width='4' height='6'/><rect x='888' y='394' width='4' height='6'/><rect x='888' y='408' width='4' height='6'/><rect x='898' y='408' width='4' height='6'/><rect x='918' y='408' width='4' height='6'/><rect x='948' y='408' width='4' height='6'/><rect x='858' y='422' width='4' height='6'/><rect x='878' y='422' width='4' height='6'/><rect x='898' y='436' width='4' height='6'/><rect x='918' y='450' width='4' height='6'/><rect x='928' y='464' width='4' height='6'/><rect x='868' y='506' width='4' height='6'/><rect x='928' y='534' width='4' height='6'/><rect x='989' y='377' width='4' height='6'/><rect x='979' y='405' width='4' height='6'/><rect x='1009' y='419' width='4' height='6'/><rect x='1009' y='503' width='4' height='6'/><rect x='1099' y='366' width='4' height='6'/><rect x='1069' y='380' width='4' height='6'/><rect x='1049' y='422' width='4' height='6'/><rect x='1119' y='450' width='4' height='6'/><rect x='1069' y='478' width='4' height='6'/><rect x='1109' y='478' width='4' height='6'/><rect x='1049' y='492' width='4' height='6'/><rect x='1089' y='506' width='4' height='6'/><rect x='1109' y='506' width='4' height='6'/><rect x='1039' y='520' width='4' height='6'/><rect x='1151' y='297' width='4' height='6'/><rect x='1171' y='297' width='4' height='6'/><rect x='1201' y='311' width='4' height='6'/><rect x='1211' y='353' width='4' height='6'/><rect x='1181' y='381' width='4' height='6'/><rect x='1151' y='395' width='4' height='6'/><rect x='1191' y='395' width='4' height='6'/><rect x='1201' y='437' width='4' height='6'/><rect x='1151' y='451' width='4' height='6'/><rect x='1201' y='465' width='4' height='6'/><rect x='1151' y='493' width='4' height='6'/><rect x='1191' y='493' width='4' height='6'/><rect x='1201' y='493' width='4' height='6'/><rect x='1161' y='521' width='4' height='6'/><rect x='1151' y='549' width='4' height='6'/><rect x='1312' y='489' width='4' height='6'/><rect x='1322' y='503' width='4' height='6'/><rect x='1332' y='503' width='4' height='6'/><rect x='1282' y='517' width='4' height='6'/><rect x='1242' y='531' width='4' height='6'/><rect x='1252' y='545' width='4' height='6'/><rect x='1312' y='545' width='4' height='6'/><rect x='1382' y='386' width='4' height='6'/><rect x='1352' y='428' width='4' height='6'/><rect x='1362' y='456' width='4' height='6'/><rect x='1372' y='456' width='4' height='6'/><rect x='1382' y='456' width='4' height='6'/><rect x='1382' y='512' width='4' height='6'/><rect x='1352' y='540' width='4' height='6'/><rect x='1436' y='311' width='4' height='6'/><rect x='1476' y='311' width='4' height='6'/><rect x='1416' y='353' width='4' height='6'/><rect x='1416' y='367' width='4' height='6'/><rect x='1486' y='381' width='4' height='6'/><rect x='1466' y='395' width='4' height='6'/><rect x='1466' y='409' width='4' height='6'/><rect x='1486' y='409' width='4' height='6'/><rect x='1476' y='437' width='4' height='6'/><rect x='1416' y='465' width='4' height='6'/><rect x='1426' y='479' width='4' height='6'/><rect x='1476' y='479' width='4' height='6'/><rect x='1426' y='507' width='4' height='6'/><rect x='1436' y='507' width='4' height='6'/><rect x='1476' y='507' width='4' height='6'/><rect x='1456' y='535' width='4' height='6'/></g></svg>
+      <div class="photo" role="img" aria-label="Gotham City de noche"></div>
+      <div class="hero-inner">
+        <div class="meta"><span class="stamp grunge">Expediente 001</span><span class="mono">Gotham City · Post-inundación</span></div>
+        <h1><img class="logo" src="../img/penguin-logo.svg" alt="El Pingüino" width="960" height="325"></h1>
+        <p class="tagline">La ciudad será suya</p>
+        <p class="lede">Carmine Falcone está muerto, el dique colapsó y el trono del bajo mundo está vacío. Este archivo documenta cómo <span class="redact">Oz Cobb</span> lo tomó, episodio por episodio.</p>
+        <a class="btn" href="#">Abrir expediente <span>→</span></a>
+      </div>
+    </section>
+
+    <div class="ticker"><div>&nbsp;◆ 8 EPISODIOS ARCHIVADOS ◆ FAMILIA FALCONE: EN DISPUTA ◆ FAMILIA MARONI: DESDE BLACKGATE ◆ DROGA "BLISS" EN CIRCULACIÓN ◆ SUJETO SOFIA FALCONE: LIBERADA DE ARKHAM ◆ 8 EPISODIOS ARCHIVADOS ◆ FAMILIA FALCONE: EN DISPUTA ◆ FAMILIA MARONI: DESDE BLACKGATE ◆ DROGA "BLISS" EN CIRCULACIÓN ◆ SUJETO SOFIA FALCONE: LIBERADA DE ARKHAM</div></div>
+
+    <section class="fan">
+      <span class="pin" style="left:6px;top:60px">3</span>
+      <span class="pin" style="left:6px;top:200px;background:var(--gold);box-shadow:0 0 0 4px rgba(216,191,134,.25)">B</span>
+      <div class="prose">
+        <h3 class="h-red grunge">El caso Cobblepot</h3>
+        <p><b>Colin Farrell</b> vuelve como <strong>Oz Cobb</strong> en la serie limitada de HBO, continuación directa de <em>The Batman</em>.</p>
+        <p>Con <b>Gotham City</b> en ruinas tras el colapso del dique, Oz busca llenar el vacío que dejó la muerte de <b>Carmine Falcone</b> y darle a su madre <b>Francis</b> la vida que siempre le prometió.</p>
+        <p>Pero primero tiene que enfrentar a <strong>Sofia Falcone</strong>, a la <b>familia Maroni</b> y a su propia reputación como "El Pingüino". El caso completo está en el <a href="#">índice de episodios</a>.</p>
+      </div>
+      <figure class="evidence" style="justify-self:end">
+        <span class="tape"></span>
+        <img src="../img/the-penguin-poster.jpg" alt="Póster de El Pingüino" width="1000" height="1250">
+        <span class="cap">Prueba A — Sujeto "Pingüino"</span>
+        <span class="stamp grunge">Clasificado</span>
+      </figure>
+    </section>
+
+    <div class="floodmark"><span>▼ Marca de inundación · colapso del dique</span></div>
+    <section class="folders">
+      <span class="pin" style="left:6px;top:60px">4</span>
+      <div class="row-head"><h3 class="h-red grunge">Expedientes por episodio</h3><a class="mono" href="#" style="color:var(--gold)">Ver índice completo →</a></div>
+      <div class="folder-grid">
+        <a class="folder" data-ep="EP. 01"><div class="ph">still</div><b>After Hours</b><span>Estado: cerrado</span></a>
+        <a class="folder" data-ep="EP. 02"><div class="ph">still</div><b>Inside Man</b><span>Estado: cerrado</span></a>
+        <a class="folder" data-ep="EP. 03"><div class="ph">still</div><b>Bliss</b><span>Estado: cerrado</span></a>
+        <a class="folder" data-ep="EP. 04"><div class="ph">still</div><b>Cent'Anni</b><span>Estado: cerrado</span></a>
+        <a class="folder" data-ep="EP. 05"><div class="ph">still</div><b>Homecoming</b><span>Estado: cerrado</span></a>
+        <a class="folder" data-ep="EP. 06"><div class="ph">still</div><b>Gold Coast</b><span>Estado: cerrado</span></a>
+        <a class="folder" data-ep="EP. 07"><div class="ph">still</div><b>Top Hat</b><span>Estado: cerrado</span></a>
+        <a class="folder" data-ep="EP. 08"><div class="ph">still</div><b>A Great or Little Thing</b><span>Estado: cerrado</span></a>
+      </div>
+    </section>
+
+    <section class="people">
+      <span class="pin" style="right:40px;top:30px;background:var(--water);box-shadow:0 0 0 4px rgba(88,164,168,.25)">C</span>
+      <span class="pin" style="left:6px;top:60px">5</span>
+      <div class="row-head"><h3 class="h-red grunge">Conocé el bajo mundo</h3></div>
+      <div class="people-grid">
+        <div class="pcard"><div class="ph">foto</div><div><b>Oz Cobb</b><small>Colin Farrell</small></div></div>
+        <div class="pcard"><div class="ph">foto</div><div><b>Sofia Falcone</b><small>Cristin Milioti</small></div></div>
+        <div class="pcard"><div class="ph">foto</div><div><b>Victor Aguilar</b><small>Rhenzy Feliz</small></div></div>
+        <div class="pcard"><div class="ph">foto</div><div><b>Salvatore Maroni</b><small>Clancy Brown</small></div></div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <svg class='wave back' viewBox='0 0 1200 40' preserveAspectRatio='none' aria-hidden='true'><path fill='#0f2426' d='M0 20 Q75 6 150 20 Q225 34 300 20 Q375 6 450 20 Q525 34 600 20 Q675 6 750 20 Q825 34 900 20 Q975 6 1050 20 Q1125 34 1200 20 V40 H0Z'/></svg><svg class='wave ' viewBox='0 0 1200 40' preserveAspectRatio='none' aria-hidden='true'><path fill='#081315' d='M0 20 Q75 6 150 20 Q225 34 300 20 Q375 6 450 20 Q525 34 600 20 Q675 6 750 20 Q825 34 900 20 Q975 6 1050 20 Q1125 34 1200 20 V40 H0Z'/><path fill='none' stroke='rgba(88,164,168,.55)' stroke-width='1.5' d='M0 20 Q75 6 150 20 Q225 34 300 20 Q375 6 450 20 Q525 34 600 20 Q675 6 750 20 Q825 34 900 20 Q975 6 1050 20 Q1125 34 1200 20'/></svg>
+      <div class="big grunge">Gotham no<br>se salva.</div>
+      <div class="bottom"><span class="mono">Fan site no oficial · Proyecto Gotham Archive</span><span class="mono">Index · Episodios · Personajes · Galería · Contacto</span></div>
+    </footer>
+  </div>
+  <div class="notes">
+    <div class="note"><i style="background:var(--gold)">A</i><span><b>Nuevo:</b> hero a sangre con Gotham City + logo oficial como h1. Lleva capas: foto (img/hero-gotham.jpg) → degradé oscuro a la izquierda para leer el texto → lluvia animada. Si falta la foto se ve un skyline en SVG con balizas rojas.</span></div>
+    <div class="note"><i style="background:var(--gold)">B</i><span><b>Nuevo:</b> el póster pasa a "El caso", como en tu screenshot. Oro = &lt;b&gt; sin link; &lt;strong&gt; con marcador rojo solo la primera vez que aparece un término clave.</span></div>
+    <div class="note"><i style="background:var(--water)">C</i><span><b>Nuevo:</b> a partir de la marca de inundación (mitad de la home) el fondo se va tiñendo de agua y oscurece a medida que bajás, con reflejos que se mueven. El footer queda "sumergido", con olas en el borde.</span></div>
+    <div class="note"><i>1</i><span>Header fino y oscuro. El código de expediente al lado del logo le da el tono sin robar protagonismo. Link activo subrayado en rojo.</span></div>
+    <div class="note"><i>2</i><span>"Nivel del agua": barra de progreso de scroll que sube como la inundación del dique. Un solo detalle de color frío en todo el sitio.</span></div>
+    <div class="note"><i>3</i><span>Bloque "fan page" puro, homenaje a tu screenshot: título rojo gastado, prosa con términos en oro, póster como evidencia.</span></div>
+    <div class="note"><i>4</i><span>Episodios como carpetas de archivo con pestaña. Hover: la carpeta se levanta y se tuerce apenas.</span></div>
+    <div class="note"><i>5</i><span>Tarjetas con borde rojo (igual que "Know Gotham's seedy underbelly") → llevan a personajes.html.</span></div>
+  </div>
+
+  <!-- ============ EPISODIOS ÍNDICE ============ -->
+  <div class="frame-label"><span class="file">02</span><b>episodios.html — Índice del archivo</b></div>
+  <div class="frame">
+    <section class="index">
+      <p class="mono">Temporada 01 · 8 informes</p>
+      <h2 class="h-red grunge" style="font-size:clamp(3rem,7vw,5rem)">Registro de incidentes</h2>
+      <div class="tbl-wrap">
+      <table class="index-table">
+        <thead><tr><th>N.º</th><th>Informe</th><th>Emisión</th><th>Sujetos</th><th>Estado</th></tr></thead>
+        <tbody>
+          <tr><td class="ep-n">01</td><td class="ep-t">After Hours</td><td class="mono">DD.MM.2024</td><td class="mono">Oz · Victor · Alberto</td><td><span class="stamp" style="font-size:.6rem">Cerrado</span></td></tr>
+          <tr><td class="ep-n">02</td><td class="ep-t">Inside Man</td><td class="mono">DD.MM.2024</td><td class="mono">Oz · Sofia</td><td><span class="stamp" style="font-size:.6rem">Cerrado</span></td></tr>
+          <tr><td class="ep-n">03</td><td class="ep-t">Bliss</td><td class="mono">DD.MM.2024</td><td class="mono">Oz · Maroni</td><td><span class="stamp" style="font-size:.6rem">Cerrado</span></td></tr>
+          <tr><td class="ep-n">04</td><td class="ep-t">Cent'Anni</td><td class="mono">DD.MM.2024</td><td class="mono">Sofia</td><td><span class="stamp" style="font-size:.6rem">Cerrado</span></td></tr>
+          <tr><td class="ep-n">…</td><td class="ep-t" style="color:var(--muted)">4 filas más</td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="notes" style="margin-top:22px">
+        <div class="note"><i>6</i><span>Lista tipo registro policial en vez de otra grilla de tarjetas: se diferencia de la home y escanea rápido. Hover en fila = tinte rojo. Idea extra: un filtro por personaje con JS.</span></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ EPISODIO DETALLE ============ -->
+  <div class="frame-label"><span class="file">03</span><b>episodios/episodio-03.html — Informe</b></div>
+  <div class="frame">
+    <div class="report">
+      <aside class="dossier-side">
+        <span class="stamp grunge" style="position:absolute;right:14px;top:18px">Ep. 03</span>
+        <p class="mono">Ficha del informe</p>
+        <dl>
+          <dt>TEMPORADA</dt><dd>01</dd>
+          <dt>EMISIÓN</dt><dd>DD.MM.2024</dd>
+          <dt>DURACIÓN</dt><dd>~60 min</dd>
+          <dt>SUJETOS INVOLUCRADOS</dt>
+          <dd class="chips"><span>OZ</span><span>VICTOR</span><span>SOFIA</span><span>MARONI</span></dd>
+          <dt>UBICACIONES</dt><dd>Crown Point · Iceberg Lounge</dd>
+        </dl>
+      </aside>
+      <div class="report-main">
+        <p class="mono">Informe de episodio · 03 de 08</p>
+        <h2 class="h-red grunge">Bliss</h2>
+        <h4>// RESUMEN</h4>
+        <p>Sinopsis del episodio con estilo fan page: prosa, links en oro a personajes. Los spoilers grandes van <span class="redact">tachados hasta pasar el mouse o tocar</span>, así el archivo sirve a quien todavía no la terminó.</p>
+        <h4>// EVIDENCIA</h4>
+        <div class="ev-row"><div class="ph">still 1</div><div class="ph">still 2</div><div class="ph">still 3</div></div>
+        <h4>// CRONOLOGÍA DEL INFORME</h4>
+        <div class="tl">
+          <div><b>MIN 04</b>Momento clave del episodio.</div>
+          <div><b>MIN 22</b>Otro momento, en una línea.</div>
+          <div><b>MIN 51</b>Cierre / cliffhanger (<span class="redact">con spoiler censurado</span>).</div>
+        </div>
+        <div class="pager">
+          <a class="btn" style="margin:0" href="#">← 02 Inside Man</a>
+          <a class="btn" style="margin:0" href="#">04 Cent'Anni →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="notes">
+    <div class="note"><i>7</i><span>Columna izquierda en "papel" (único bloque claro del sitio) = la ficha física del expediente. Es el contraste que hace sentir el archivo.</span></div>
+    <div class="note"><i>8</i><span>Spoilers censurados con barra: interacción simple (CSS :hover + clic en mobile) y muy temática.</span></div>
+    <div class="note"><i>9</i><span>Las 8 páginas comparten esta plantilla idéntica; solo cambian textos e imágenes.</span></div>
+  </div>
+
+  <!-- ============ PERSONAJES ============ -->
+  <div class="frame-label"><span class="file">04</span><b>personajes.html — Tablero de investigación</b></div>
+  <div class="frame">
+    <div class="corkboard">
+      <svg class="strings" viewBox="0 0 1200 560" preserveAspectRatio="none" aria-hidden="true">
+        <g stroke="#ef1a2d" stroke-width="2" fill="none" opacity=".85">
+          <path d="M600 110 Q420 200 250 300"/><path d="M600 110 Q780 190 950 290"/>
+          <path d="M250 300 Q420 380 560 420"/><path d="M950 290 Q780 390 640 420"/>
+          <path d="M600 110 L600 420"/><path d="M250 300 Q600 250 950 290"/>
+        </g>
+      </svg>
+      <div class="polaroid" style="left:calc(50% - 75px);top:40px;transform:rotate(-2deg)"><div class="ph"></div><b>Oz Cobb</b></div>
+      <div class="polaroid" style="left:16%;top:230px;transform:rotate(4deg)"><div class="ph"></div><b>Sofia Falcone</b></div>
+      <div class="polaroid" style="left:calc(84% - 150px);top:220px;transform:rotate(-5deg)"><div class="ph"></div><b>Salvatore Maroni</b></div>
+      <div class="polaroid" style="left:calc(50% - 75px);top:350px;transform:rotate(3deg)"><div class="ph"></div><b>Victor Aguilar</b></div>
+      <span class="stamp grunge" style="position:absolute;right:30px;top:30px;font-size:.85rem">Relaciones</span>
+      <p class="type" style="position:absolute;left:28px;top:28px;color:var(--muted);max-width:220px;font-size:.85rem">Clic en una foto → se abre la ficha del personaje (modal) y se resaltan solo sus hilos.</p>
+    </div>
+  </div>
+  <div class="notes">
+    <div class="note"><i>10</i><span>Tablero con hilo rojo (SVG) en desktop; en mobile se convierte en una grilla de polaroids normal.</span></div>
+    <div class="note"><i>11</i><span>galeria.html puede usar los mismos polaroids + lightbox; contacto.html como "formulario de denuncia anónima".</span></div>
+  </div>
+
+</div>
+<script>
+  // barra "nivel del agua": sube con el scroll
+  const bar=document.querySelector('.water');
+  const upd=()=>{const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight||1);bar.style.setProperty('--lvl',Math.round(p*100)+'%')};
+  addEventListener('scroll',upd,{passive:true});upd();
+</script>
+</body>
+</html>
