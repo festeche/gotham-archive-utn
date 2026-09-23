@@ -10,13 +10,18 @@
   <meta property="og:locale" content="es_AR">
   <meta property="og:title" content="EP. 08 A Great or Little Thing · Gotham Archive">
   <meta property="og:description" content="El último movimiento de la partida, y el precio que hay que pagar por ganarla.">
-  <meta property="og:image" content="../img/episodios/ep08.webp">
+  <meta property="og:image" content="https://festeche.github.io/gotham-archive-utn/img/episodios/ep08.webp">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Íconos de redes (Font Awesome, solo la fuente de marcas) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css">
+  <!-- Fuentes del sitio -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=Rubik:ital,wght@0,400;0,500;0,700;1,400&amp;family=Special+Elite&amp;display=swap">
+
+  <!-- Íconos de redes (Font Awesome, solo marcas). Están en el pie, así que se cargan
+       sin frenar el resto de la página (media="print" y al terminar pasa a "all"). -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css"></noscript>
   <link rel="stylesheet" href="../css/estilos.css">
   <script src="../js/script.js" defer></script>
 </head>
@@ -86,6 +91,10 @@
     </svg>
   </div>
 
+  <!-- Nevada: el invierno llega a Gotham al final de la serie (anticipa la Gotham nevada de The Batman: Part II).
+       Capa decorativa fija, solo CSS (sección 30). -->
+  <div class="nevada" aria-hidden="true"></div>
+
   <!-- ============ 1. PORTADA DEL INFORME ============ -->
   <section class="portada portada--informe">
     <img class="portada__foto" src="../img/episodios/ep08.webp" alt="" width="1584" height="1056">
@@ -149,7 +158,7 @@
 
             <p>Herido, <strong>Oz Cobb</strong> escapa y mueve sus últimas piezas: <b>Victor</b> y <b>Link Tsai</b> organizan <span class="censura" tabindex="0" role="button" aria-label="Spoiler: tocá para revelar">un golpe dentro de la Tríada contra Feng Zhao</span>, y las bandas le dan la espalda a Sofia. Oz se la lleva en un último viaje en auto, haciéndole creer que va a matarla, pero <span class="censura" tabindex="0" role="button" aria-label="Spoiler: tocá para revelar">la entrega a la policía, que la manda de vuelta a Arkham</span>.</p>
 
-            <p>Ya en la cima, Oz se queda a solas con Victor junto al río, el chico que lo siguió desde la primera noche. Y ahí el sujeto muestra quién es de verdad: <span class="censura" tabindex="0" role="button" aria-label="Spoiler: tocá para revelar">lo estrangula, porque tener a alguien que lo quiera lo hace débil</span>.</p>
+            <p>Llega el invierno y la primera nieve empieza a cubrir Gotham. Ya en la cima, Oz se queda a solas con Victor junto al río, el chico que lo siguió desde la primera noche. Y ahí el sujeto muestra quién es de verdad: <span class="censura" tabindex="0" role="button" aria-label="Spoiler: tocá para revelar">lo estrangula, porque tener a alguien que lo quiera lo hace débil</span>.</p>
           </div>
 
           <h2 class="apartado">Cronología del informe</h2>
@@ -226,7 +235,7 @@
           </ol>
 
           <div class="veredicto">
-            <p class="veredicto__escena maquina">Última entrada del archivo: Oz Cobb, en su nuevo penthouse, mira Gotham desde arriba. La ciudad, por fin, es suya.</p>
+            <p class="veredicto__escena maquina">Oz Cobb, en su nuevo penthouse, mira Gotham desde arriba. La ciudad, por fin, es suya.</p>
             <p class="veredicto__estado">
               <span class="meta">Sujeto principal · Oz Cobb · Estado</span>
               <span class="veredicto__frase">Dueño del bajo mundo de Gotham. <button class="por-ahora" type="button" aria-expanded="false" aria-controls="anexo-final">Por ahora.</button></span>
@@ -241,7 +250,7 @@
           <aside class="proximamente" aria-labelledby="proximamente-titulo">
             <span class="meta meta--oro">Próximamente en el archivo</span>
             <p class="proximamente__titulo" id="proximamente-titulo">Expediente <em>The Batman: Part II</em></p>
-            <p class="proximamente__texto">La secuela de <em>The Batman</em>, dirigida por <b>Matt Reeves</b>, transcurre pocas semanas después de esta serie, con Colin Farrell de vuelta como Oz. Estreno en cines previsto para el <time datetime="2027-10-01">1 de octubre de 2027</time>.</p>
+            <p class="proximamente__texto">La secuela de <em>The Batman</em>, dirigida por <b>Matt Reeves</b>, transcurre pocas semanas después de esta serie, en una Gotham cubierta de nieve, con Colin Farrell de vuelta como Oz. Estreno en cines previsto para el <time datetime="2027-10-01">1 de octubre de 2027</time>.</p>
             <span class="sello sello--chico sello--derecho" aria-hidden="true">En preparación</span>
           </aside>
 
@@ -261,7 +270,7 @@
 <footer class="pie">
   <div class="contenedor">
     <div class="pie__cabeza">
-      <p class="pie__frase grunge">Gotham no<br>se salva.</p>
+      <p class="pie__frase grunge">Gotham no se salva.</p>
       <ul class="pie__redes" role="list" aria-label="Redes sociales">
         <li><a class="pie__red" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
         <li><a class="pie__red" href="#" aria-label="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>

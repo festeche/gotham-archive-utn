@@ -16,7 +16,7 @@
   <meta property="og:locale" content="es_AR">
   <meta property="og:title" content="Gotham Archive · El Pingüino (2024)">
   <meta property="og:description" content="Los 8 episodios de El Pingüino como expedientes de investigación. Fan page no oficial.">
-  <meta property="og:image" content="img/hero-gotham.jpg">
+  <meta property="og:image" content="https://festeche.github.io/gotham-archive-utn/img/hero-gotham.jpg">
 
   <!-- Conexiones anticipadas: el reproductor de YouTube carga más rápido al tocar "Reproducir" -->
   <link rel="preconnect" href="https://www.youtube.com">
@@ -24,9 +24,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Íconos de redes (Font Awesome, solo la fuente de marcas) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css">
+  <!-- Fuentes del sitio -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=Rubik:ital,wght@0,400;0,500;0,700;1,400&amp;family=Special+Elite&amp;display=swap">
+
+  <!-- Íconos de redes (Font Awesome, solo marcas). Están en el pie, así que se cargan
+       sin frenar el resto de la página (media="print" y al terminar pasa a "all"). -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css"></noscript>
+  <!-- La foto del hero es un fondo CSS: se pide antes para que aparezca rápido -->
+  <link rel="preload" as="image" href="img/hero-gotham.webp" fetchpriority="high">
   <link rel="stylesheet" href="css/estilos.css">
   <script src="js/script.js" defer></script>
 </head>
@@ -82,7 +89,7 @@
     <div class="contenedor">
       <div class="hero__contenido">
         <div class="hero__meta"><span class="sello grunge">Expediente 001</span><span class="meta">Gotham City · Post-inundación</span></div>
-        <h1><img class="hero__logo" src="img/penguin-logo.svg" alt="El Pingüino" width="960" height="325"></h1>
+        <h1><img class="hero__logo" src="img/penguin-logo.webp" alt="El Pingüino" width="960" height="325" fetchpriority="high"></h1>
         <p class="hero__lema">La ciudad será suya</p>
         <p class="bajada">Carmine Falcone está muerto, el dique colapsó y el trono del bajo mundo está vacío. Este archivo documenta cómo <span class="censura" tabindex="0" role="button" aria-label="Spoiler: tocá para revelar">Oz Cobb</span> lo tomó, episodio por episodio.</p>
         <a class="btn" href="#caso">Abrir expediente <span class="btn__flecha" aria-hidden="true">→</span></a>
@@ -104,7 +111,7 @@
       </div>
       <figure class="evidencia revelar revelar--retraso-1">
         <span class="evidencia__cinta" aria-hidden="true"></span>
-        <img src="img/the-penguin-poster.jpg" alt="Póster oficial de El Pingüino: Oz Cobb de traje, bajo la lluvia" width="1000" height="1250" loading="lazy">
+        <img src="img/the-penguin-poster.webp" alt="Póster oficial de El Pingüino: Oz Cobb de traje, bajo la lluvia" width="800" height="1000" loading="lazy">
         <figcaption class="evidencia__pie">Prueba A — Sujeto "Pingüino"</figcaption>
         <span class="sello grunge revelar" aria-hidden="true">Clasificado</span>
       </figure>
@@ -156,21 +163,21 @@
     <div class="contenedor">
       <article class="expediente revelar">
         <nav class="expediente__pestanas" aria-label="Ir directo a un episodio">
-          <a href="episodios/episodio-01.html" title="01 · After Hours">EP. 01</a>
-          <a href="episodios/episodio-02.html" title="02 · Inside Man">EP. 02</a>
-          <a href="episodios/episodio-03.html" title="03 · Bliss">EP. 03</a>
-          <a href="episodios/episodio-04.html" title="04 · Cent'Anni">EP. 04</a>
-          <a href="episodios/episodio-05.html" title="05 · Homecoming">EP. 05</a>
-          <a href="episodios/episodio-06.html" title="06 · Gold Summit">EP. 06</a>
-          <a href="episodios/episodio-07.html" title="07 · Top Hat">EP. 07</a>
-          <a href="episodios/episodio-08.html" title="08 · A Great or Little Thing">EP. 08</a>
+          <a href="episodios/episodio-01.html" title="01 · After Hours"><span class="expediente__ep">EP. </span>01</a>
+          <a href="episodios/episodio-02.html" title="02 · Inside Man"><span class="expediente__ep">EP. </span>02</a>
+          <a href="episodios/episodio-03.html" title="03 · Bliss"><span class="expediente__ep">EP. </span>03</a>
+          <a href="episodios/episodio-04.html" title="04 · Cent'Anni"><span class="expediente__ep">EP. </span>04</a>
+          <a href="episodios/episodio-05.html" title="05 · Homecoming"><span class="expediente__ep">EP. </span>05</a>
+          <a href="episodios/episodio-06.html" title="06 · Gold Summit"><span class="expediente__ep">EP. </span>06</a>
+          <a href="episodios/episodio-07.html" title="07 · Top Hat"><span class="expediente__ep">EP. </span>07</a>
+          <a href="episodios/episodio-08.html" title="08 · A Great or Little Thing"><span class="expediente__ep">EP. </span>08</a>
         </nav>
 
         <div class="expediente__carpeta">
           <div class="expediente__cuerpo">
             <span class="meta meta--oro">Exp. N.º 2024-OZ · Temporada única</span>
             <h2 class="titulo titulo--xxl grunge" id="episodios-titulo">Expediente completo de episodios</h2>
-            <p class="bajada">Ocho informes, uno por capítulo: resumen, evidencias, personajes involucrados y los datos que se te pudieron escapar.</p>
+            <p class="bajada">Ocho informes, uno por capítulo: resumen, cronología, personajes involucrados y los datos que se te pudieron escapar.</p>
             <a class="btn btn--solido" href="episodios.html">Abrir el índice <span class="btn__flecha" aria-hidden="true">→</span></a>
           </div>
 
@@ -212,7 +219,7 @@
 <footer class="pie pie--sumergido">
   <div class="contenedor">
     <div class="pie__cabeza">
-      <p class="pie__frase grunge">Gotham no<br>se salva.</p>
+      <p class="pie__frase grunge">Gotham no se salva.</p>
       <ul class="pie__redes" role="list" aria-label="Redes sociales">
         <li><a class="pie__red" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
         <li><a class="pie__red" href="#" aria-label="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>

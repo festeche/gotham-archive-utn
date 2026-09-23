@@ -10,13 +10,18 @@
   <meta property="og:locale" content="es_AR">
   <meta property="og:title" content="EP. 02 Inside Man · Gotham Archive">
   <meta property="og:description" content="Oz necesita a alguien adentro y arma un doble juego entre las dos familias más peligrosas de Gotham.">
-  <meta property="og:image" content="../img/episodios/ep02.webp">
+  <meta property="og:image" content="https://festeche.github.io/gotham-archive-utn/img/episodios/ep02.webp">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Íconos de redes (Font Awesome, solo la fuente de marcas) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css">
+  <!-- Fuentes del sitio -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=Rubik:ital,wght@0,400;0,500;0,700;1,400&amp;family=Special+Elite&amp;display=swap">
+
+  <!-- Íconos de redes (Font Awesome, solo marcas). Están en el pie, así que se cargan
+       sin frenar el resto de la página (media="print" y al terminar pasa a "all"). -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css"></noscript>
   <link rel="stylesheet" href="../css/estilos.css">
   <script src="../js/script.js" defer></script>
 </head>
@@ -145,10 +150,10 @@
 </main>
 
 <!-- ============ PIE ============ -->
-<footer class="pie">
+<footer class="pie pie--sumergido">
   <div class="contenedor">
     <div class="pie__cabeza">
-      <p class="pie__frase grunge">Gotham no<br>se salva.</p>
+      <p class="pie__frase grunge">Gotham no se salva.</p>
       <ul class="pie__redes" role="list" aria-label="Redes sociales">
         <li><a class="pie__red" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
         <li><a class="pie__red" href="#" aria-label="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>

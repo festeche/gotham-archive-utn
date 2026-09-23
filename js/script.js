@@ -7,7 +7,7 @@
    02. Menú mobile
    03. Aparecer al scrollear (.revelar)
    04. Spoilers (.censura)
-   05. Nivel del agua (--nivel)
+   05. Nivel del agua (--nivel en .nivel-agua)
    06. Tráiler de YouTube (portada → iframe)
    07. Archivo de episodios (filtros y vistas)
    08. Informe de episodio (barra de lectura y spoilers)
@@ -92,14 +92,17 @@ document.querySelectorAll('.censura').forEach(censura => {
 
 
 /* 05 · NIVEL DEL AGUA --------------------------------------------------- */
-if (document.querySelector('.nivel-agua')) {
+const barraAgua = document.querySelector('.nivel-agua');
+
+if (barraAgua) {
   const raiz = document.documentElement;
   let pendiente = false;
 
   const medirNivel = () => {
     const recorrido = raiz.scrollHeight - raiz.clientHeight || 1;
-    const porcentaje = Math.min(100, Math.round((raiz.scrollTop / recorrido) * 100));
-    raiz.style.setProperty('--nivel', porcentaje + '%');
+    const nivel = Math.min(1, raiz.scrollTop / recorrido);
+    // La variable va en la barra y no en <html>: así el navegador solo recalcula la barra
+    barraAgua.style.setProperty('--nivel', nivel.toFixed(3));
     pendiente = false;
   };
 
@@ -222,7 +225,7 @@ if (archivo) {
 
 
 /* 08 · INFORME DE EPISODIO (episodios/episodio-0X.html) -----------------
-   - Barra de lectura: porcentaje de scroll → --lectura
+   - Barra de lectura: porcentaje de scroll → --lectura (0–1, en la barra)
    - Botón "Revelar todos los spoilers" + contador de datos censurados
    ----------------------------------------------------------------------- */
 const barraLectura = document.querySelector('.lectura');
@@ -233,8 +236,8 @@ if (barraLectura) {
 
   const medirLectura = () => {
     const recorrido = raiz.scrollHeight - raiz.clientHeight || 1;
-    const porcentaje = Math.min(100, (raiz.scrollTop / recorrido) * 100);
-    raiz.style.setProperty('--lectura', porcentaje.toFixed(1) + '%');
+    const avance = Math.min(1, raiz.scrollTop / recorrido);
+    barraLectura.style.setProperty('--lectura', avance.toFixed(3));
     pendienteLectura = false;
   };
 

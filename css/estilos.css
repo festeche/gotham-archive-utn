@@ -44,7 +44,7 @@
    - .cabecera.is-open            → abre el menú en mobile
    - .revelar.is-visible          → elemento entró en pantalla
    - .censura.is-revealed         → spoiler revelado con clic/tap
-   - :root { --nivel: 0–100% }    → altura de la barra .nivel-agua
+   - .nivel-agua { --nivel: 0–1 }  → escala de la barra del agua
    - .tablero.is-filtrado + .polaroid.is-activa + .hilo.is-activo
    - .registro tr[hidden]         → filtro de episodios por personaje
    ========================================================================== */
@@ -53,14 +53,15 @@
 /* ==========================================================================
    01. FUENTES Y VARIABLES
    ========================================================================== */
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Rubik:ital,wght@0,400;0,500;0,700;1,400&family=Special+Elite&display=swap");
+/* Las fuentes se cargan con <link> en el <head> de cada página (un @import acá
+   obligaba a bajar primero este CSS y recién después las fuentes). */
 
 :root {
   /* — Paleta — */
   --c-tinta: #0b0b0a;          /* fondo principal */
   --c-grafito: #131312;        /* fondo de secciones alternas */
   --c-concreto: #1c1c1a;
-  --c-cemento: #2c2c29;        /* bordes, placeholders */
+  --c-cemento: #2c2c29;        /* bordes */
   --c-linea: rgba(232, 224, 208, .12);
   --c-papel: #e8e0d0;          /* texto claro principal */
   --c-papel-osc: #d9d1c1;      /* fondos de papel (fichas, polaroids) */
@@ -120,11 +121,13 @@
   --sombra-foto: 0 24px 50px rgba(0, 0, 0, .7);
   --sombra-tarjeta: 0 18px 40px rgba(0, 0, 0, .5);
 
-  /* — Texturas SVG generadas (0 KB de imágenes) — */
-  --tex-grunge: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' seed='4'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -22 0 0 0 16.2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  --tex-grano: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='g' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
-  --tex-concreto: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><filter id='c' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='.015 .025' numOctaves='5' seed='9' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23c)' opacity='.2'/></svg>");
-  --tex-reflejos: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500'><filter id='k' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='turbulence' baseFrequency='.012' numOctaves='2' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .68  0 0 0 0 .7  -8 0 0 0 1'/></filter><rect width='100%25' height='100%25' filter='url(%23k)'/></svg>");
+  /* — Texturas: imágenes WebP chicas (se descargan una vez y quedan en caché).
+     Antes eran SVG con feTurbulence generados en CSS: el celular tenía que
+     recalcular el ruido en cada repintado, y eso trababa el scroll. — */
+  --tex-grunge: url("../img/texturas/grunge.webp");
+  --tex-grano: url("../img/texturas/grano.webp");
+  --tex-concreto: url("../img/texturas/concreto.webp");
+  --tex-reflejos: url("../img/texturas/reflejos.webp");
   --tex-ola: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='40' viewBox='0 0 600 40' preserveAspectRatio='none'><path fill='%23081315' d='M0 20 Q75 6 150 20 T300 20 T450 20 T600 20 V40 H0Z'/><path fill='none' stroke='rgba(88,164,168,.55)' stroke-width='1.5' d='M0 20 Q75 6 150 20 T300 20 T450 20 T600 20'/></svg>");
   --tex-ola-fondo: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='40' viewBox='0 0 600 40' preserveAspectRatio='none'><path fill='%230f2426' d='M0 22 Q75 34 150 22 T300 22 T450 22 T600 22 V40 H0Z'/></svg>");
 }
@@ -240,7 +243,6 @@ h1, h2, h3, h4 { font-weight: 400; line-height: 1; }
 }
 .titulo--xxl { font-size: var(--t-xxl); line-height: .88; }
 .titulo--lg  { font-size: var(--t-lg); }
-.titulo--claro { color: var(--c-papel); }
 
 /* Metadatos / etiquetas en mono */
 .meta {
@@ -337,18 +339,6 @@ h1, h2, h3, h4 { font-weight: 400; line-height: 1; }
 .mt-6 { margin-top: var(--e-6); }
 .mt-7 { margin-top: var(--e-7); }
 
-/* Placeholder mientras no haya imagen */
-.placeholder {
-  display: grid;
-  place-items: center;
-  background: repeating-linear-gradient(135deg, #1a1a18 0 10px, #161614 10px 20px);
-  border: 1px solid var(--c-cemento);
-  color: #55534c;
-  font: var(--t-xs) var(--f-mono);
-  letter-spacing: .14em;
-  text-transform: uppercase;
-}
-
 
 /* ==========================================================================
    06. COMPONENTES CHICOS
@@ -371,8 +361,6 @@ h1, h2, h3, h4 { font-weight: 400; line-height: 1; }
 .btn:hover .btn__flecha { transform: translateX(4px); }
 .btn--solido { background: var(--c-rojo); color: var(--c-tinta); font-weight: 600; }
 .btn--solido:hover { background: var(--c-papel); border-color: var(--c-papel); }
-.btn--oscuro { border-color: var(--c-tinta); color: var(--c-tinta); }
-.btn--oscuro:hover { background: var(--c-tinta); color: var(--c-papel); }
 
 /* — Sello de goma — */
 .sello {
@@ -584,7 +572,7 @@ button.chip[aria-pressed="true"] { background: var(--c-rojo); border-color: var(
   position: absolute;
   inset: 0;
   z-index: -2;
-  background: url("../img/hero-gotham.jpg") center / cover no-repeat;
+  background: url("../img/hero-gotham.webp") center / cover no-repeat;
   filter: grayscale(.35) contrast(1.1) brightness(.8);
 }
 .hero::before { /* degradé para leer el texto */
@@ -704,8 +692,7 @@ button.chip[aria-pressed="true"] { background: var(--c-rojo); border-color: var(
   transform: rotate(2deg);
   justify-self: center;
 }
-.evidencia--izq { transform: rotate(-2deg); }
-.evidencia img, .evidencia .placeholder {
+.evidencia img {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
@@ -794,7 +781,6 @@ button.chip[aria-pressed="true"] { background: var(--c-rojo); border-color: var(
   line-height: 1;
   color: var(--c-papel);
 }
-.carpeta__estado { font: .78rem var(--f-maquina); color: var(--c-apagado); }
 
 
 /* ==========================================================================
@@ -903,11 +889,12 @@ button.chip[aria-pressed="true"] { background: var(--c-rojo); border-color: var(
 .nivel-agua::after {
   content: "";
   position: absolute;
-  inset: auto 0 0;
-  height: var(--nivel, 0%);
+  inset: 0;
   background: linear-gradient(to top, var(--c-agua-osc), var(--c-agua));
   box-shadow: 0 0 12px rgba(var(--c-agua-rgb), .5);
-  transition: height .15s linear;
+  transform: scaleY(var(--nivel, 0)); /* transform: se anima sin recalcular la página */
+  transform-origin: bottom;
+  transition: transform .15s linear;
 }
 .nivel-agua__texto {
   position: absolute;
@@ -933,8 +920,8 @@ button.chip[aria-pressed="true"] { background: var(--c-rojo); border-color: var(
 }
 .pie__frase {
   font-family: var(--f-titulo);
-  font-size: clamp(3rem, 1.5rem + 7vw, 7rem);
-  line-height: .85;
+  font-size: clamp(2.5rem, 1.2rem + 3.6vw, 5rem); /* una sola línea */
+  line-height: .9;
   text-transform: uppercase;
   color: var(--c-cemento);
 }
@@ -963,7 +950,7 @@ button.chip[aria-pressed="true"] { background: var(--c-rojo); border-color: var(
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   gap: var(--e-5);
 }
 .pie__redes { display: flex; gap: var(--e-3); list-style: none; }
@@ -985,7 +972,7 @@ button.chip[aria-pressed="true"] { background: var(--c-rojo); border-color: var(
   transform: translateY(-2px);
 }
 
-/* Variante sumergida (solo home) */
+/* Variante sumergida: pie entero bajo el agua (home, episodios.html y EP. 01–03) */
 .pie--sumergido {
   border-top: 0;
   background: linear-gradient(180deg, var(--c-profundo), #050c0d);
@@ -1023,6 +1010,61 @@ button.chip[aria-pressed="true"] { background: var(--c-rojo); border-color: var(
 .pie--sumergido .pie__red { color: #6f9194; border-color: rgba(var(--c-agua-rgb), .25); }
 .pie--sumergido .pie__red:hover,
 .pie--sumergido .pie__red:focus-visible { color: var(--c-agua); border-color: var(--c-agua); background: rgba(var(--c-agua-rgb), .08); }
+
+/* Agua a nivel fijo (EP. 04–06): el agua baja a medida que Gotham drena.
+   La línea del agua se engancha a una parte del pie, así sigue igual en cualquier ancho:
+     .pie--agua-frase → a mitad de "Gotham no se salva."  (EP. 04)
+     .pie--agua-base  → en la línea del aviso "Fan site"   (EP. 05)
+     .pie--agua-mapa  → a la altura del mapa del sitio     (EP. 06)
+   Desde EP. 07 el pie queda seco (el agua sigue en los túneles). */
+.pie--agua { overflow: hidden; }
+.pie--agua-frase .pie__cabeza,
+.pie--agua-base .pie__base,
+.pie--agua-mapa .pie__links { position: relative; --linea: 0px; } /* --linea: altura de la superficie del agua */
+.pie--agua-frase .pie__cabeza { --linea: 55%; }
+.pie--agua-mapa .pie__links { flex-basis: 100%; --linea: -14px; } /* ocupa la fila entera para que el agua cruce todo el pie */
+.pie--agua-frase .pie__cabeza::before,
+.pie--agua-base .pie__base::before,
+.pie--agua-mapa .pie__links::before { /* el agua: desde la línea hasta abajo (el pie la recorta) */
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: calc(var(--linea) + 18px);
+  left: calc(50% - 50vw);
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  background: linear-gradient(rgba(8, 19, 21, .91), rgba(5, 12, 13, .93)),
+              var(--tex-reflejos) 0 0 / 500px,
+              var(--c-profundo);
+  animation: reflejos-fijo 26s linear infinite;
+}
+@keyframes reflejos-fijo { to { background-position: 0 0, 500px 250px, 0 0; } }
+.pie--agua-frase .pie__cabeza::after,
+.pie--agua-base .pie__base::after,
+.pie--agua-mapa .pie__links::after { /* olas en la superficie */
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: calc(var(--linea) - 20px); /* la superficie de la ola queda justo en --linea */
+  left: calc(50% - 50vw);
+  width: 100vw;
+  height: 42px;
+  pointer-events: none;
+  background: var(--tex-ola) 0 2px / 600px 40px repeat-x,
+              var(--tex-ola-fondo) 0 0 / 600px 40px repeat-x;
+  animation: olas 14s linear infinite;
+}
+/* Lo que queda bajo el agua toma el color del agua */
+.pie--agua-frase .pie__red { color: #6f9194; border-color: rgba(var(--c-agua-rgb), .25); }
+.pie--agua-frase .pie__base,
+.pie--agua-base .pie__base { border-color: rgba(var(--c-agua-rgb), .35); }
+.pie--agua-frase .meta,
+.pie--agua-base .meta,
+.pie--agua-frase .pie__links a,
+.pie--agua-base .pie__links a,
+.pie--agua-mapa .pie__links a { color: #6f9194; }
+.pie--agua .pie__links a:hover { color: var(--c-agua); }
 
 
 /* ==========================================================================
@@ -1123,21 +1165,6 @@ button.chip[aria-pressed="true"] { background: var(--c-rojo); border-color: var(
 .informe__cuerpo { padding: var(--e-6) clamp(1rem, 3vw, 2.5rem) var(--e-7); min-width: 0; }
 .informe__cuerpo .titulo { margin-top: var(--e-2); }
 
-/* Grilla de fotos (evidencia) */
-.evidencias {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: var(--e-3);
-  list-style: none;
-}
-.evidencias img, .evidencias .placeholder {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border: 1px solid var(--c-cemento);
-}
-.evidencias figcaption { margin-top: var(--e-1); font: .78rem var(--f-maquina); color: var(--c-apagado); }
-
 /* Cronología */
 .cronologia {
   display: grid;
@@ -1195,14 +1222,6 @@ button.chip[aria-pressed="true"] { background: var(--c-rojo); border-color: var(
 }
 .tablero__hilos { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .hilo { stroke: var(--c-rojo); stroke-width: 2; fill: none; opacity: .85; transition: opacity var(--transicion); }
-.tablero__nota {
-  position: absolute;
-  left: var(--e-5);
-  top: var(--e-5);
-  max-width: 220px;
-  font: .85rem var(--f-maquina);
-  color: var(--c-apagado);
-}
 
 .polaroid {
   position: absolute;
@@ -1230,7 +1249,7 @@ button.chip[aria-pressed="true"] { background: var(--c-rojo); border-color: var(
   transform: translateX(-50%);
 }
 .polaroid:hover, .polaroid:focus-visible { transform: scale(1.06) rotate(0deg); z-index: 3; }
-.polaroid img, .polaroid .placeholder { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: top; }
+.polaroid img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: top; }
 .polaroid__nombre {
   position: absolute;
   left: 10px;
@@ -1267,7 +1286,6 @@ button.chip[aria-pressed="true"] { background: var(--c-rojo); border-color: var(
 .modal::backdrop { background: rgba(5, 5, 5, .85); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
 .modal[open] { animation: abrir .35s var(--rebote); }
 @keyframes abrir { from { opacity: 0; transform: translateY(16px) scale(.98); } }
-.modal__cuerpo { display: grid; grid-template-columns: 220px 1fr; gap: var(--e-5); padding: var(--e-6); }
 .modal__cerrar {
   position: absolute;
   top: var(--e-3);
@@ -1478,9 +1496,6 @@ html.has-visor { overflow: hidden; }
   .informe { grid-template-columns: 1fr; }
   .ficha { position: relative; top: 0; }
 
-  .modal__cuerpo { grid-template-columns: 1fr; }
-  .modal__cuerpo > :first-child { max-width: 220px; }
-
   /* Tablero → grilla de polaroids (se ocultan los hilos) */
   .tablero {
     height: auto;
@@ -1491,12 +1506,15 @@ html.has-visor { overflow: hidden; }
     padding: var(--e-8) var(--e-4) var(--e-6);
   }
   .tablero__hilos { display: none; }
-  .tablero__nota { position: static; max-width: none; width: 100%; text-align: center; }
   .polaroid { position: relative; left: auto; top: auto; }
 }
 
 @media (max-width: 640px) {
   :root { --alto-cabecera: 58px; }
+  /* Pie apilado y centrado */
+  .pie__cabeza, .pie__base { flex-direction: column; justify-content: center; text-align: center; }
+  .pie__redes, .pie__links { justify-content: center; }
+  .pie__links { gap: var(--e-3) var(--e-4); }
   .marca__exp { display: none; }
   .hero { min-height: 560px; }
   .hero::before {
@@ -1530,6 +1548,25 @@ html.has-visor { overflow: hidden; }
 /* ==========================================================================
    25. MOVIMIENTO REDUCIDO
    ========================================================================== */
+/* ==========================================================================
+   RENDIMIENTO EN CELULARES Y TABLETS
+   En pantallas táctiles o angostas se apagan los efectos que obligan a
+   repintar toda la pantalla en cada cuadro. El diseño se ve igual, quieto.
+   ========================================================================== */
+@media (hover: none), (max-width: 900px) {
+  body::after { animation: none; }                  /* grano de película quieto */
+  .zona-agua::before,
+  .pie--sumergido::before,
+  .pie--agua-frase .pie__cabeza::before,
+  .pie--agua-base .pie__base::before,
+  .pie--agua-mapa .pie__links::before { animation: none; } /* reflejos del agua quietos */
+  .cabecera::before {                                /* sin desenfoque detrás del menú */
+    -webkit-backdrop-filter: none;
+            backdrop-filter: none;
+    background: rgba(11, 11, 10, .97);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
@@ -1810,6 +1847,18 @@ html.has-visor { overflow: hidden; }
   .expediente__carpeta > .sello { position: static; order: -1; justify-self: start; }
   .expediente::before { inset-inline: 12px -6px; }
   .expediente::after { inset-inline: 30px -2px; }
+  /* Pestañas: solo el número ("EP." queda para lectores de pantalla) */
+  .expediente__pestanas { left: 12px; right: 12px; gap: 3px; }
+  .expediente__pestanas a { padding-inline: 9px; }
+  .expediente__ep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+@media (max-width: 420px) {
+  .expediente__pestanas a { padding-inline: 7px; }
+}
+/* Donde ni los números entran, las pestañas se ocultan (el botón lleva al índice) */
+@media (max-width: 340px) {
+  .expediente { --alto-pestana: 0px; }
+  .expediente__pestanas { display: none; }
 }
 
 
@@ -1978,7 +2027,7 @@ html:not(.js) .archivo__tabla { margin-top: var(--e-8); }
 /* ==========================================================================
    29. INFORME DE EPISODIO (episodios/episodio-0X.html)
    Complementa la sección 18 (.informe, .ficha, .cronologia, .paginador).
-   Ganchos JS: .lectura (--lectura) · .informe__revelar[aria-pressed]
+   Ganchos JS: .lectura (--lectura: 0–1) · .informe__revelar[aria-pressed]
    · [data-cantidad-spoilers]
    ========================================================================== */
 
@@ -1995,8 +2044,9 @@ html:not(.js) .archivo__tabla { margin-top: var(--e-8); }
 .lectura::after {
   content: "";
   display: block;
-  width: var(--lectura, 0%);
   height: 100%;
+  transform: scaleX(var(--lectura, 0));
+  transform-origin: left;
   background: var(--c-rojo);
   box-shadow: 0 0 10px rgba(var(--c-rojo-rgb), .6);
 }
@@ -2223,12 +2273,24 @@ html:not(.js) .informe__herramientas { display: none; }
   color: var(--c-oro-vivo);
   border-bottom: 2px dashed rgba(245, 197, 66, .6);
   text-shadow: 0 0 18px rgba(245, 197, 66, .45);
-  animation: latido 2.4s ease-in-out infinite;
+  position: relative;
+  isolation: isolate;
   transition: color var(--transicion), border-color var(--transicion);
 }
+.por-ahora::before { /* brillo que late: se anima la opacidad (no el text-shadow, que repinta en cada cuadro) */
+  content: "";
+  position: absolute;
+  inset: -.3em -.5em;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgba(245, 197, 66, .3), transparent);
+  opacity: .3;
+  animation: latido 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
 .por-ahora:hover, .por-ahora:focus-visible { color: #ffd866; }
-.por-ahora[aria-expanded="true"] { animation: none; border-bottom-color: transparent; text-shadow: 0 0 30px rgba(245, 197, 66, .8); }
-@keyframes latido { 50% { text-shadow: 0 0 32px rgba(245, 197, 66, .85); } }
+.por-ahora[aria-expanded="true"]::before { animation: none; opacity: 1; }
+.por-ahora[aria-expanded="true"] { border-bottom-color: transparent; text-shadow: 0 0 30px rgba(245, 197, 66, .8); }
+@keyframes latido { 50% { opacity: 1; } }
 .veredicto__anexo {
   max-width: 34rem;
   margin: var(--e-5) auto 0;
@@ -2252,6 +2314,52 @@ html:not(.js) .informe__herramientas { display: none; }
   transition: opacity 1.4s ease, visibility 1.4s;
 }
 html.is-senal .batsenal { opacity: 1; visibility: visible; }
+
+/* — Nevada (solo EP. 08): el invierno llega a Gotham —
+   Dos capas de copos (lejos: chicos y lentos · cerca: grandes y rápidos).
+   Se animan con transform (no repinta la página). Cada capa baja exactamente
+   un "azulejo" por vuelta, así el loop no se nota; el rotate le da viento. */
+.nevada {
+  position: fixed;
+  inset: 0;
+  z-index: 80; /* sobre el contenido, debajo de la cabecera y la barra de lectura */
+  overflow: hidden;
+  pointer-events: none;
+}
+.nevada::before,
+.nevada::after {
+  content: "";
+  position: absolute;
+  inset: -60%;
+}
+.nevada::before {
+  background: radial-gradient(circle at 8% 12%, rgba(238, 238, 232, 0.7) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 27% 63%, rgba(238, 238, 232, 0.7) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 44% 31%, rgba(238, 238, 232, 0.7) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 61% 84%, rgba(238, 238, 232, 0.7) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 79% 47%, rgba(238, 238, 232, 0.7) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 93% 9%, rgba(238, 238, 232, 0.7) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 15% 92%, rgba(238, 238, 232, 0.7) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 52% 6%, rgba(238, 238, 232, 0.7) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 70% 22%, rgba(238, 238, 232, 0.7) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 36% 78%, rgba(238, 238, 232, 0.7) 0 1px, transparent 1.8px);
+  background-size: 260px 260px;
+  opacity: .55;
+  animation: nevar-lejos 24s linear infinite;
+}
+.nevada::after {
+  background: radial-gradient(circle at 11% 40%, rgba(238, 238, 232, 0.85) 0 2px, transparent 2.8px),
+    radial-gradient(circle at 38% 15%, rgba(238, 238, 232, 0.85) 0 2.6px, transparent 3.4000000000000004px),
+    radial-gradient(circle at 66% 58%, rgba(238, 238, 232, 0.85) 0 2px, transparent 2.8px),
+    radial-gradient(circle at 88% 29%, rgba(238, 238, 232, 0.85) 0 2.8px, transparent 3.5999999999999996px),
+    radial-gradient(circle at 24% 86%, rgba(238, 238, 232, 0.85) 0 2.2px, transparent 3.0px),
+    radial-gradient(circle at 57% 93%, rgba(238, 238, 232, 0.85) 0 2.4px, transparent 3.2px);
+  background-size: 420px 420px;
+  opacity: .5;
+  animation: nevar-cerca 11s linear infinite;
+}
+@keyframes nevar-lejos { from { transform: rotate(8deg) translateY(-260px); } to { transform: rotate(8deg) translateY(0); } }
+@keyframes nevar-cerca { from { transform: rotate(14deg) translateY(-420px); } to { transform: rotate(14deg) translateY(0); } }
 .batsenal__haz { /* haz del reflector, desde abajo */
   position: absolute;
   inset: 0;
@@ -2476,7 +2584,6 @@ html:not(.js) .muro__ayuda { display: none; }
 /* — Tablero + panel lateral — */
 .tablero-zona { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: var(--e-5); align-items: stretch; }
 .tablero .polaroid { cursor: pointer; }
-.polaroid .placeholder { font-size: .55rem; }
 .polaroid[aria-pressed="true"] { transform: scale(1.08) rotate(0deg); z-index: 4; box-shadow: 0 0 0 3px var(--c-rojo), 0 18px 34px rgba(0, 0, 0, .7); }
 .tablero__sello { position: absolute; right: var(--e-5); bottom: var(--e-5); }
 .tablero__panel {
@@ -2544,7 +2651,7 @@ html:not(.js) .muro__ayuda { display: none; }
 /* — Expediente de sujeto — */
 .portada__grilla { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--e-7); align-items: center; }
 .portada--sujeto .evidencia { width: clamp(200px, 22vw, 280px); }
-.portada--sujeto .evidencia img, .portada--sujeto .evidencia .placeholder { aspect-ratio: 1; object-position: top; }
+.portada--sujeto .evidencia img { aspect-ratio: 1; object-position: top; }
 .portada--sujeto .evidencia .sello { position: absolute; top: auto; right: -16px; bottom: 60px; } /* top: auto anula el de .portada .sello */
 .ficha .chips a.chip:hover { background: #1e1d1a; color: var(--c-papel-osc); }
 .relaciones { max-width: var(--ancho-texto); list-style: none; border-top: 1px solid var(--c-cemento); }
