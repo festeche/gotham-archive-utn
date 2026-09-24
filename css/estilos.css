@@ -18,7 +18,7 @@
    11. El caso (texto + evidencia)
    12. Carpetas de episodios
    13. Tarjetas de personajes
-   14. Agua: marca de inundación, zonas y barra de nivel
+   14. Agua: marca de inundación y zonas
    15. Pie de página (normal y sumergido)
    16. Portada de páginas interiores + migas
    17. Episodios: registro (tabla) y filtros
@@ -42,9 +42,9 @@
    GANCHOS PARA script.js (clases/variables que el JS debe poner):
    - <html class="js">            → activa las animaciones .revelar
    - .cabecera.is-open            → abre el menú en mobile
+   - .nav__item--sub.is-abierto   → abre un submenú en mobile (flecha .submenu__boton)
    - .revelar.is-visible          → elemento entró en pantalla
    - .censura.is-revealed         → spoiler revelado con clic/tap
-   - .nivel-agua { --nivel: 0–1 }  → escala de la barra del agua
    - .tablero.is-filtrado + .polaroid.is-activa + .hilo.is-activo
    - .registro tr[hidden]         → filtro de episodios por personaje
    ========================================================================== */
@@ -220,6 +220,9 @@ body::after {
   -webkit-mask-size: 300px;
           mask-size: 300px;
 }
+/* La máscara recorta todo lo que sale de la caja: sin este aire arriba,
+   las tildes de las mayúsculas (Á, É, Í, Ñ…) desaparecían por el line-height bajo */
+.titulo.grunge { padding-top: .15em; }
 
 /* Fondos con textura */
 .fondo-concreto { background: var(--tex-concreto), var(--c-grafito); }
@@ -519,6 +522,9 @@ button.chip[aria-pressed="true"] { background: var(--c-rojo); border-color: var(
   width: 260px;
   grid-template-columns: 1fr;
 }
+
+/* Flecha para abrir el submenú (solo mobile; en escritorio se abre con hover o foco) */
+.submenu__boton { display: none; }
 
 /* Botón hamburguesa (solo mobile) */
 .nav__boton {
@@ -874,39 +880,6 @@ button.chip[aria-pressed="true"] { background: var(--c-rojo); border-color: var(
   padding-bottom: calc(var(--e-seccion) + 2rem);
   background: linear-gradient(180deg, var(--c-orilla) 0%, #0b1617 60%, var(--c-profundo) 100%);
 }
-
-/* Barra "nivel del agua" (fija, sube con el scroll; JS setea --nivel) */
-.nivel-agua {
-  position: fixed;
-  right: 12px;
-  top: calc(var(--alto-cabecera) + 24px);
-  bottom: 24px;
-  z-index: 90;
-  width: 5px;
-  background: rgba(232, 224, 208, .06);
-  pointer-events: none;
-}
-.nivel-agua::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, var(--c-agua-osc), var(--c-agua));
-  box-shadow: 0 0 12px rgba(var(--c-agua-rgb), .5);
-  transform: scaleY(var(--nivel, 0)); /* transform: se anima sin recalcular la página */
-  transform-origin: bottom;
-  transition: transform .15s linear;
-}
-.nivel-agua__texto {
-  position: absolute;
-  right: 11px;
-  top: 0;
-  writing-mode: vertical-rl;
-  font: 600 .58rem var(--f-mono);
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--c-apagado);
-}
-
 
 /* ==========================================================================
    15. PIE DE PÁGINA
@@ -1399,7 +1372,7 @@ html.has-visor { overflow: hidden; }
 }
 .campo textarea {
   min-height: 9rem;
-  resize: vertical;
+  resize: none; /* no se estira: con 1000 caracteres alcanza, y se scrollea adentro */
   line-height: 1.9rem;
   background: repeating-linear-gradient(transparent 0 calc(1.9rem - 1px), rgba(30, 29, 26, .25) calc(1.9rem - 1px) 1.9rem);
   border-bottom: 0;
@@ -1490,6 +1463,31 @@ html.has-visor { overflow: hidden; }
   .submenu::before { display: none; }
   .submenu a { font-size: var(--t-sm); color: var(--c-apagado); padding-inline: 0; }
 
+  /* Submenús cerrados: el nombre lleva a la página, la flecha abre la lista */
+  .nav__item--sub { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
+  .nav__item--sub .submenu { grid-column: 1 / -1; display: none; }
+  .nav__item--sub.is-abierto .submenu { display: grid; }
+  .submenu__boton {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    border-bottom: 1px solid var(--c-linea);
+    color: var(--c-apagado);
+    transition: color var(--transicion);
+  }
+  .submenu__boton::before { /* flecha hacia abajo */
+    content: "";
+    width: 11px;
+    height: 11px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-3px) rotate(45deg);
+    transition: transform var(--transicion);
+  }
+  .submenu__boton:hover,
+  .submenu__boton[aria-expanded="true"] { color: var(--c-rojo); }
+  .submenu__boton[aria-expanded="true"]::before { transform: translateY(3px) rotate(-135deg); } /* flecha hacia arriba */
+
   .caso { grid-template-columns: 1fr; }
   .caso .evidencia { max-width: 280px; }
 
@@ -1521,8 +1519,6 @@ html.has-visor { overflow: hidden; }
     background: linear-gradient(0deg, var(--c-tinta) 10%, rgba(11, 11, 10, .6) 60%, rgba(11, 11, 10, .3) 100%);
   }
   .hero__lema { letter-spacing: .22em; }
-  .nivel-agua { right: 4px; width: 3px; }
-  .nivel-agua__texto { display: none; }
   .campos { grid-template-columns: 1fr; }
   .portada .sello,
   .formulario > .sello { position: static; margin-bottom: var(--e-4); }
@@ -2506,7 +2502,6 @@ html:not(.js) .muro__ayuda { display: none; }
 .formulario__enviado .sello { color: var(--c-sangre); }
 .formulario__enviado:not([hidden]) .sello { animation: golpe .45s var(--rebote) both; }
 .formulario__gracias { margin-top: var(--e-4); font-size: 1rem; line-height: 1.6; color: #2a2925; }
-.formulario__nota { margin-top: var(--e-3); font: .72rem var(--f-mono); letter-spacing: .04em; color: #7a7466; }
 .formulario__enviado .btn { margin-top: var(--e-5); border-color: var(--c-sangre); color: #1e1d1a; }
 .formulario__enviado .btn:hover { color: var(--c-tinta); }
 

@@ -7,7 +7,7 @@
    02. Menú mobile
    03. Aparecer al scrollear (.revelar)
    04. Spoilers (.censura)
-   05. Nivel del agua (--nivel en .nivel-agua)
+   (05 quedó libre: se quitó la barra del nivel del agua)
    06. Tráiler de YouTube (portada → iframe)
    07. Archivo de episodios (filtros y vistas)
    08. Informe de episodio (spoilers)
@@ -26,9 +26,19 @@ document.documentElement.classList.add('js');
 const cabecera = document.querySelector('.cabecera');
 const botonMenu = document.querySelector('.nav__boton');
 
+const flechasSubmenu = document.querySelectorAll('.submenu__boton');
+
+function cerrarSubmenus() {
+  flechasSubmenu.forEach(flecha => {
+    flecha.parentElement.classList.remove('is-abierto');
+    flecha.setAttribute('aria-expanded', 'false');
+  });
+}
+
 function cerrarMenu() {
   if (!cabecera) return;
   cabecera.classList.remove('is-open');
+  cerrarSubmenus(); // la próxima vez el menú abre con los submenús cerrados
   botonMenu?.setAttribute('aria-expanded', 'false');
   botonMenu?.setAttribute('aria-label', 'Abrir menú');
 }
@@ -39,6 +49,12 @@ if (cabecera && botonMenu) {
     botonMenu.setAttribute('aria-expanded', abierto);
     botonMenu.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
   });
+
+  // Flecha de Episodios / Personajes: abre o cierra su submenú (el nombre sigue siendo un link)
+  flechasSubmenu.forEach(flecha => flecha.addEventListener('click', () => {
+    const abierto = flecha.parentElement.classList.toggle('is-abierto');
+    flecha.setAttribute('aria-expanded', abierto);
+  }));
 
   // Tocar un link del menú lo cierra
   cabecera.querySelectorAll('.nav a').forEach(link => link.addEventListener('click', cerrarMenu));
@@ -51,12 +67,6 @@ if (cabecera && botonMenu) {
     }
   });
 }
-
-
-// Redes del pie: todavía sin destino, evitamos el salto al tope de la página
-document.querySelectorAll('.pie__red[href="#"]').forEach(link =>
-  link.addEventListener('click', e => e.preventDefault())
-);
 
 
 /* 03 · APARECER AL SCROLLEAR ------------------------------------------- */
@@ -89,32 +99,6 @@ document.querySelectorAll('.censura').forEach(censura => {
     }
   });
 });
-
-
-/* 05 · NIVEL DEL AGUA --------------------------------------------------- */
-const barraAgua = document.querySelector('.nivel-agua');
-
-if (barraAgua) {
-  const raiz = document.documentElement;
-  let pendiente = false;
-
-  const medirNivel = () => {
-    const recorrido = raiz.scrollHeight - raiz.clientHeight || 1;
-    const nivel = Math.min(1, raiz.scrollTop / recorrido);
-    // La variable va en la barra y no en <html>: así el navegador solo recalcula la barra
-    barraAgua.style.setProperty('--nivel', nivel.toFixed(3));
-    pendiente = false;
-  };
-
-  window.addEventListener('scroll', () => {
-    if (!pendiente) {
-      pendiente = true;
-      requestAnimationFrame(medirNivel);
-    }
-  }, { passive: true });
-
-  medirNivel();
-}
 
 
 /* 06 · TRÁILER DE YOUTUBE ----------------------------------------------

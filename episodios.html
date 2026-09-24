@@ -38,7 +38,8 @@
         <li class="nav__item"><a class="nav__link" href="index.html">Inicio</a></li>
         <li class="nav__item nav__item--sub">
           <a class="nav__link" href="episodios.html" aria-current="page">Episodios</a>
-          <ul class="submenu" role="list">
+          <button class="submenu__boton" type="button" aria-expanded="false" aria-controls="submenu-episodios" aria-label="Mostrar los episodios"></button>
+          <ul class="submenu" id="submenu-episodios" role="list">
             <li><a href="episodios/episodio-01.html"><span class="submenu__num">01</span>After Hours</a></li>
             <li><a href="episodios/episodio-02.html"><span class="submenu__num">02</span>Inside Man</a></li>
             <li><a href="episodios/episodio-03.html"><span class="submenu__num">03</span>Bliss</a></li>
@@ -51,7 +52,8 @@
         </li>
         <li class="nav__item nav__item--sub">
           <a class="nav__link" href="personajes.html">Personajes</a>
-          <ul class="submenu submenu--personajes" role="list">
+          <button class="submenu__boton" type="button" aria-expanded="false" aria-controls="submenu-personajes" aria-label="Mostrar los personajes"></button>
+          <ul class="submenu submenu--personajes" id="submenu-personajes" role="list">
             <li><a href="personajes/oz-cobb.html"><span class="submenu__num">01</span>Oz Cobb</a></li>
             <li><a href="personajes/sofia-falcone.html"><span class="submenu__num">02</span>Sofia Falcone</a></li>
             <li><a href="personajes/victor-aguilar.html"><span class="submenu__num">03</span>Victor Aguilar</a></li>
@@ -337,10 +339,10 @@
     <div class="pie__cabeza">
       <p class="pie__frase grunge">Gotham no se salva.</p>
       <ul class="pie__redes" role="list" aria-label="Redes sociales">
-        <li><a class="pie__red" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
-        <li><a class="pie__red" href="#" aria-label="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
-        <li><a class="pie__red" href="#" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a></li>
-        <li><a class="pie__red" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a></li>
+        <li><a class="pie__red" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (se abre en otra pestaña)"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+        <li><a class="pie__red" href="https://x.com/" target="_blank" rel="noopener noreferrer" aria-label="X (se abre en otra pestaña)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+        <li><a class="pie__red" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube (se abre en otra pestaña)"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a></li>
+        <li><a class="pie__red" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook (se abre en otra pestaña)"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a></li>
       </ul>
     </div>
     <div class="pie__base">
