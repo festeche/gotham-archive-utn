@@ -2672,6 +2672,6 @@ a.cronologia__marca:hover { border-color: var(--c-oro); }
 }
 @media (max-width: 720px) {
   .portada__grilla { grid-template-columns: 1fr; }
-  .portada--sujeto .evidencia { justify-self: start; margin-top: var(--e-4); }
+  .portada--sujeto .evidencia { justify-self: center; margin-top: var(--e-4); }
   .relaciones li { grid-template-columns: 1fr; gap: var(--e-1); }
 }
