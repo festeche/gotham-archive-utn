@@ -332,8 +332,9 @@ if (fotosAmpliables.length && typeof HTMLDialogElement === 'function') {
      (La clase .is-sellado está en el HTML, pero el CSS solo la aplica
      con html.js: sin JS, el informe se ve completo.)
    - Fichas de destino: cada .destino se abre o se cierra al tocarla.
-   - "Por ahora.": enciende la señal en el cielo del fondo (html.is-senal)
-     y muestra el anexo final.
+   - "Por ahora.": enciende la señal en el cielo del fondo (html.is-senal),
+     muestra el anexo y el cartel de The Batman: Part II. Al volver a tocarlo
+     se apagan la señal y el anexo; el cartel queda visible.
    ----------------------------------------------------------------------- */
 const expedienteFinal = document.querySelector('.final');
 
@@ -360,11 +361,13 @@ document.querySelectorAll('.destino').forEach(destino => {
 const botonPorAhora = document.querySelector('.por-ahora');
 
 if (botonPorAhora) {
-  const anexo = document.getElementById(botonPorAhora.getAttribute('aria-controls'));
+  const anexo = document.getElementById('anexo-final');
+  const proximamente = document.getElementById('proximamente');
   botonPorAhora.addEventListener('click', () => {
     const encendida = document.documentElement.classList.toggle('is-senal');
     botonPorAhora.setAttribute('aria-expanded', encendida);
     anexo.hidden = !encendida;
+    if (encendida) proximamente.hidden = false; // una vez visto, el cartel queda
   });
 }
 

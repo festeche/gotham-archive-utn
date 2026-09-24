@@ -1554,7 +1554,7 @@ html.has-visor { overflow: hidden; }
    repintar toda la pantalla en cada cuadro. El diseño se ve igual, quieto.
    ========================================================================== */
 @media (hover: none), (max-width: 900px) {
-  body::after { animation: none; }                  /* grano de película quieto */
+  body::after { inset: 0; animation: none; }       /* grano quieto y del tamaño de la pantalla (antes el doble, para poder moverse) */
   .zona-agua::before,
   .pie--sumergido::before,
   .pie--agua-frase .pie__cabeza::before,
@@ -2067,6 +2067,7 @@ html:not(.js) .informe__herramientas { display: none; }
 /* Sello final: "golpea" cuando llegás al final del informe */
 .informe__cierre { display: flex; justify-content: flex-end; margin-top: var(--e-7); }
 .informe__cierre + .paginador { margin-top: var(--e-5); }
+.informe__cierre + .veredicto { margin-top: var(--e-6); } /* EP. 08: el sello va antes del veredicto */
 
 
 /* ==========================================================================
@@ -2075,9 +2076,10 @@ html:not(.js) .informe__herramientas { display: none; }
    toca "Romper el sello" (JS 10). Sin JS se ve todo, sin precinto.
    .destino → fichas con el destino de cada sujeto, tapadas hasta abrirlas.
    .rastro  → lista de lo que Oz dejó en el camino, con link a cada episodio.
-   .veredicto + .por-ahora → al tocar "Por ahora." se enciende .batsenal
-   (capa fija de fondo) y aparece el anexo final (JS 10, html.is-senal).
-   .proximamente → cartel del próximo expediente (The Batman: Part II).
+   Orden del cierre: sello "Caso cerrado" → .veredicto con "Por ahora."
+   Al tocar "Por ahora." se enciende .batsenal (capa fija de fondo, html.is-senal)
+   y aparecen el anexo y .proximamente (The Batman: Part II). Al volver a tocar,
+   la señal y el anexo se apagan, pero .proximamente queda (JS 10).
    ========================================================================== */
 
 /* — Precinto — */
@@ -2279,7 +2281,6 @@ html:not(.js) .informe__herramientas { display: none; }
   line-height: 1.6;
   color: #d9d3c4;
 }
-.veredicto__anexo .meta { display: block; margin-bottom: var(--e-2); }
 .veredicto__anexo:not([hidden]) { animation: aparecer 1.2s ease .8s both; }
 @keyframes aparecer { from { opacity: 0; translate: 0 10px; } }
 
@@ -2341,6 +2342,12 @@ html.is-senal .batsenal { opacity: 1; visibility: visible; }
 }
 @keyframes nevar-lejos { from { transform: rotate(8deg) translateY(-260px); } to { transform: rotate(8deg) translateY(0); } }
 @keyframes nevar-cerca { from { transform: rotate(14deg) translateY(-420px); } to { transform: rotate(14deg) translateY(0); } }
+/* Celulares y tablets: nieve quieta y del tamaño de la pantalla.
+   Animada, cada capa ocupaba ~57 MB de memoria gráfica y el teléfono se trababa. */
+@media (hover: none), (max-width: 900px) {
+  .nevada::before,
+  .nevada::after { inset: 0; animation: none; }
+}
 .batsenal__haz { /* haz del reflector, desde abajo */
   position: absolute;
   inset: 0;
@@ -2388,7 +2395,7 @@ html.is-senal .batsenal svg { animation: encendido 1.6s steps(1) both; } /* titi
 .proximamente__titulo em { font-style: normal; color: var(--c-oro); }
 .proximamente__texto { max-width: 40rem; margin-top: var(--e-3); font-size: .92rem; color: var(--c-texto); }
 .proximamente__texto b { color: var(--c-oro); font-weight: 500; }
-.proximamente .sello { position: absolute; top: var(--e-4); right: var(--e-4); color: var(--c-oro); }
+.proximamente:not([hidden]) { animation: aparecer 1.2s ease 1.6s both; } /* después del anexo */
 
 @media (max-width: 640px) {
   .js .final.is-sellado .informe { max-height: 85vh; }
@@ -2396,7 +2403,6 @@ html.is-senal .batsenal svg { animation: encendido 1.6s steps(1) both; } /* titi
   .destinos { grid-template-columns: 1fr; }
   .rastro li { grid-template-columns: 3.8rem 1fr; }
   .rastro__hecho { grid-column: 2; }
-  .proximamente .sello { position: static; margin-top: var(--e-4); }
   .batsenal svg { left: 50%; width: 88vw; }
   .batsenal__haz { clip-path: polygon(58% 100%, 64% 100%, 72% 38%, 30% 34%); }
 }
