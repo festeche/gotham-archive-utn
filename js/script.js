@@ -10,7 +10,7 @@
    05. Nivel del agua (--nivel en .nivel-agua)
    06. Tráiler de YouTube (portada → iframe)
    07. Archivo de episodios (filtros y vistas)
-   08. Informe de episodio (barra de lectura y spoilers)
+   08. Informe de episodio (spoilers)
    09. Visor de fotos de la galería: lightbox propio con <dialog> nativo
    10. Informe final: precinto y fichas de destino
    11. Galería: filtros por categoría
@@ -225,32 +225,8 @@ if (archivo) {
 
 
 /* 08 · INFORME DE EPISODIO (episodios/episodio-0X.html) -----------------
-   - Barra de lectura: porcentaje de scroll → --lectura (0–1, en la barra)
    - Botón "Revelar todos los spoilers" + contador de datos censurados
    ----------------------------------------------------------------------- */
-const barraLectura = document.querySelector('.lectura');
-
-if (barraLectura) {
-  const raiz = document.documentElement;
-  let pendienteLectura = false;
-
-  const medirLectura = () => {
-    const recorrido = raiz.scrollHeight - raiz.clientHeight || 1;
-    const avance = Math.min(1, raiz.scrollTop / recorrido);
-    barraLectura.style.setProperty('--lectura', avance.toFixed(3));
-    pendienteLectura = false;
-  };
-
-  window.addEventListener('scroll', () => {
-    if (!pendienteLectura) {
-      pendienteLectura = true;
-      requestAnimationFrame(medirLectura);
-    }
-  }, { passive: true });
-
-  medirLectura();
-}
-
 const botonRevelar = document.querySelector('.informe__revelar');
 
 if (botonRevelar) {
@@ -410,17 +386,8 @@ if (muro) {
 
     fotosMuro.forEach(item => {
       const coincide = categoria === 'todas' || item.dataset.categoria === categoria;
-      const estabaOculta = item.hidden;
       item.hidden = !coincide;
-      if (coincide) {
-        visibles++;
-        item.classList.add('is-visible');
-        if (estabaOculta) {
-          item.classList.remove('is-filtrada-entrando');
-          void item.offsetWidth; // reinicia la animación
-          item.classList.add('is-filtrada-entrando');
-        }
-      }
+      if (coincide) visibles++;
     });
 
     chipsCategoria.forEach(c => c.setAttribute('aria-pressed', c === chip));

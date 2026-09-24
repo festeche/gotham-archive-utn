@@ -33,7 +33,7 @@
    26. Metraje de archivo (tráiler)
    27. Cartel: expediente completo de episodios
    28. Episodios.html: archivo (filtros, vistas, legajos)
-   29. Informe de episodio (barra de lectura, spoilers)
+   29. Informe de episodio (spoilers)
    30. Informe final EP. 08 (precinto, destinos, rastro)
    31. Galería: muro de evidencia (filtros)
    32. Contacto: hero con la señal + formulario
@@ -2027,29 +2027,10 @@ html:not(.js) .archivo__tabla { margin-top: var(--e-8); }
 /* ==========================================================================
    29. INFORME DE EPISODIO (episodios/episodio-0X.html)
    Complementa la sección 18 (.informe, .ficha, .cronologia, .paginador).
-   Ganchos JS: .lectura (--lectura: 0–1) · .informe__revelar[aria-pressed]
+   Ganchos JS: .informe__revelar[aria-pressed]
    · [data-cantidad-spoilers]
    ========================================================================== */
 
-/* Barra de lectura: fija bajo la cabecera, crece con el scroll */
-.lectura {
-  position: fixed;
-  top: var(--alto-cabecera);
-  left: 0;
-  z-index: 99;
-  width: 100%;
-  height: 3px;
-  pointer-events: none;
-}
-.lectura::after {
-  content: "";
-  display: block;
-  height: 100%;
-  transform: scaleX(var(--lectura, 0));
-  transform-origin: left;
-  background: var(--c-rojo);
-  box-shadow: 0 0 10px rgba(var(--c-rojo-rgb), .6);
-}
 
 /* Portada con el still de fondo, muy apagado */
 .portada--informe { overflow: hidden; isolation: isolate; }
@@ -2322,7 +2303,7 @@ html.is-senal .batsenal { opacity: 1; visibility: visible; }
 .nevada {
   position: fixed;
   inset: 0;
-  z-index: 80; /* sobre el contenido, debajo de la cabecera y la barra de lectura */
+  z-index: 80; /* sobre el contenido, debajo de la cabecera */
   overflow: hidden;
   pointer-events: none;
 }
@@ -2441,7 +2422,6 @@ html:not(.js) .muro__barra { display: none; }
 .galeria__item[hidden] { display: none; }
 .galeria__boton { cursor: zoom-in; }
 .galeria__boton img { aspect-ratio: auto; }
-.galeria__item.is-filtrada-entrando { animation: caer .45s var(--rebote); }
 .muro__ayuda { margin-top: var(--e-4); font-size: .85rem; color: var(--c-apagado); }
 html:not(.js) .muro__ayuda { display: none; }
 
